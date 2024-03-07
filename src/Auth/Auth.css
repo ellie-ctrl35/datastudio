@@ -75,6 +75,7 @@ form input{
     font-size: 1rem;
     outline: none;
     background: black;
+    color: white;
 }
 form button{
     width: 92%;
