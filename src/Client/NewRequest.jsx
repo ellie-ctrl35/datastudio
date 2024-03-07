@@ -10,6 +10,9 @@ const NewRequest = () => {
             <img src={Logo} alt='Studio' />
             <h1>Data Studio</h1>
             </div>
+            <div className='navlinks-cont'>
+
+            </div>
         </div>
         <div className='the-bottom'>
             

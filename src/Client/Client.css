@@ -17,3 +17,11 @@
     height: 10%;
     border-bottom: white 1px solid;
 }
+.navlinks-cont{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background: dodgerblue;
+}
