@@ -1,5 +1,90 @@
 .main{
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    margin: 0%;
+}
+.the-navbar{
+    width: 97vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    height: 10%;
+    border-bottom: white 1px solid;
+}
+.the-form{
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    align-self: center;
+    padding-top: 5%;
+}
+.the-form h1{
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Montserrat';
+    margin-top: 7%;
+}
+.the-form p{
+    color: white;
+    font-size: 0.9rem;
+    font-family: 'Montserrat';
+    margin-top: 0%;
+    opacity: 0.7;
+}
+.logo-cont{
+    width: 15%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    height: 90%;
+    font-family: 'Inter';
+}
+.logo-cont h1{
+    font-size: 1.2rem;
+    color: white;
+    margin-left: 10px;
+}
+.the-form form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+}
+form label{
+    color: white;
+    font-size: 1rem;
+    font-family: 'Montserrat';
+    margin-top: 2%;
+}
+form input{
+    width: 90%;
+    height: 10%;
+    margin-top: 1%;
+    border: white 1px solid;
+    border-radius: 0.4rem;
+    padding-left: 5px;
+    font-family: 'Montserrat';
+    font-size: 1rem;
+    outline: none;
+    background: black;
+}
+form button{
+    width: 92%;
+    height: 10%;
+    margin-top: 5%;
+    border: white 1px solid;
+    border-radius: 0.4rem;
+    font-family: 'Montserrat';
+    font-size: 1rem;
+    background: white;
+    color: black;
+    cursor: pointer;
 }
