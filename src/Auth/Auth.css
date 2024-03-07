@@ -66,7 +66,7 @@ form label{
 }
 form input{
     width: 90%;
-    height: 10%;
+    height: 11%;
     margin-top: 1%;
     border: white 1px solid;
     border-radius: 0.4rem;
@@ -79,7 +79,7 @@ form input{
 }
 form button{
     width: 92%;
-    height: 10%;
+    height: 11%;
     margin-top: 5%;
     border: white 1px solid;
     border-radius: 0.4rem;
@@ -88,4 +88,10 @@ form button{
     background: white;
     color: black;
     cursor: pointer;
+}
+form button:hover{
+    background: black;
+    border: white 2px solid;
+    color: white;
+    transition: 1s ease-in-out;
 }

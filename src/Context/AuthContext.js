@@ -8,24 +8,19 @@ export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [userRequests, setUserRequests] = useState([]);
-  const [streamToken,setStreamtoken] = useState("")
 
   const Login = (email, password) => {
     try {
       return axios.post("http://localhost:4000/login", { email, password })
       .then((res) => {
         console.log(res);
-        const { email, role, token, username,streamToken,id,comAssociate } = res.data;
-        const UserInfo = { email, role, username,id,comAssociate };
+        const { email, role, token, username,id } = res.data;
+        const UserInfo = { email, role, username,id,};
         console.log(UserInfo);
         setUserInfo(UserInfo);
-        console.log(streamToken)
         setUserToken(token);
-        setStreamtoken(streamToken)
         localStorage.setItem("userInfo", JSON.stringify(UserInfo));
         localStorage.setItem("userToken", token);
-        localStorage.setItem("streamToken", streamToken);
-        fetchUserRequests(email);
       })
       .catch((error) => {
         console.error("Login error from infoContext", error);

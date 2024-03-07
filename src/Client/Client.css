@@ -20,8 +20,69 @@
 .navlinks-cont{
     width: 45%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     height: 100%;
-    background: dodgerblue;
 }
+.navlink{
+    height: 35%;
+    padding: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    border: white 1px solid;
+    color: white;
+    font-size: 0.9rem;
+    font-family: 'Inter';
+}
+.navlink:focus{
+    background-color: white;
+    color: black;
+}
+.the-bottom{
+    width: 50%;
+    height: 80%;
+    align-self: center;
+    margin-top: 2%;
+}
+.new-request{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+select {
+    width: 91%; /* Full width */
+    height: 11%;
+    padding: 8px 16px; /* Some padding */
+    margin: 10px 0; /* Some space around the select */
+    border: 1px solid #ffffff; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    background-color: rgb(0, 0, 0); /* White background color */
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 1rem;
+    opacity: 0.5;
+}
+select:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #ffffff; /* Change border color on focus */
+}
+  
+  /* You may want to style the option elements as well */
+option {
+    padding: 10px; /* Add some padding to the options */
+    height: 1rem;
+    width: 100%;
+}
+.desc{
+    width: 90%;
+    height: 40%;
+    background: black;
+    border: #ffffff solid 1px;
+    border-radius: 0.5rem;
+    margin-top: 2%;
+}
+  
