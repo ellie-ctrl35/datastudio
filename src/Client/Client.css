@@ -1,0 +1,19 @@
+.App{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    margin: 0%;
+}
+.the-navbar{
+    width: 97vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    height: 10%;
+    border-bottom: white 1px solid;
+}
