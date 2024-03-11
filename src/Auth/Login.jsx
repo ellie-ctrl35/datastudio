@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState("")
-  const {Login}=useContext(AuthContext);
+  const {Login,logout}=useContext(AuthContext);
   const navigate =useNavigate();
 
   const loginUser = (e) =>{
@@ -39,6 +39,7 @@ const Login = () => {
           <button type='submit'>Login</button>
         </form>
       </div>
+      <button onClick={()=>logout()}>Log out</button>
     </div>
   )
 }

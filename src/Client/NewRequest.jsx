@@ -4,10 +4,29 @@ import Logo from '../resources/Studio.png'
 import { Link } from 'react-router-dom'
 import Avatar from 'react-avatar';
 import { AuthContext } from '../Context/AuthContext';
+import axios from 'axios'
 
 const NewRequest = () => {
   const {userInfo}= useContext(AuthContext);
-  const username = userInfo.
+  //const name = userInfo.username;
+  const [title,setTitle ]=useState('');
+  const [desc,setDesc]=useState("");
+  const [type,setType]=useState("")
+
+  const sendRequest = (e) =>{
+   e.preventDefault();
+   const data = {
+    title,
+    desc,
+    type,
+    //author: name
+   }
+   axios.post('http://localhost:4000/sendrequest',data).then((res)=>{
+    console.log(res);
+
+   })
+  }
+
   return (
     <div className='App'>
         <div className='the-navbar'>
@@ -19,24 +38,24 @@ const NewRequest = () => {
               <Link className='navlink' to='/client/new-request'>New Request</Link>
               <Link className='navlink' to='/client/requests/approved'>Confirmed Requests</Link>
               <Link className='navlink' to='/client/requests/not-approved'>Pending Requests</Link>
-              <Avatar round name='Emmanuel Nyatepe' size={40}/>
+              <Avatar round name="Emmanuel Nyatepe" size={40}/>
             </div>
             
         </div>
         <div className='the-bottom'>
             <h2 style={{fontFamily:"Montserrat",color:"white"}}>New Report</h2>
             <p style={{fontFamily:"Montserrat",color:"white",opacity:"0.5",fontSize:"0.9rem"}}>Send a new request now</p>
-            <form className='new-request'>
+            <form className='new-request' onSubmit={sendRequest}>
              <label style={{fontFamily:"Montserrat",color:"white",fontSize:"0.8rem",marginTop:"2%"}}>Report Title</label>
-             <input placeholder='Enter a Tile for your Request' type='text'/>
+             <input onChange={(e)=>setTitle(e.target.value)} placeholder='Enter a Tile for your Request' type='text'/>
              <label style={{fontFamily:"Montserrat",color:"white",fontSize:"0.8rem",marginTop:"2%"}}>Report Type</label>
-             <select>
+             <select onSelect={(e)=>setType(e.target.value)}>
              <option value="" disabled selected>Select one</option>
-             <option value="CMreport">CM REPORT</option>
-             <option value="PMreport">PM REPORT</option>
+             <option value="CMReport">CM REPORT</option>
+             <option value="PMReport">PM REPORT</option>
              </select>
              <label style={{fontFamily:"Montserrat",color:"white",fontSize:"0.8rem",marginTop:"2%"}}>Label</label>
-             <textarea className='desc'/>
+             <input onChange={(e)=>setDesc(e.target.value)} className='desc'/>  
              <button style={{fontWeight:700}}>Create Request</button>
             </form>
         </div>

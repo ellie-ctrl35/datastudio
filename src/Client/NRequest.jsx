@@ -1,9 +1,24 @@
-import React from 'react'
+import {useContext,useState,useEffect} from 'react'
 import './Client.css';
 import { Link } from 'react-router-dom';
 import Logo from '../resources/Studio.png'
+import Avatar from 'react-avatar';
+import { AuthContext } from '../Context/AuthContext';
+import axios from 'axios'
 
 const NRequest = () => {
+  const {userInfo}= useContext(AuthContext);
+  console.log(userInfo)
+  const author = userInfo.email;
+  console.log(author)
+  const name = userInfo.username;
+  const [requests,setRequests] = useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:4000/getreports?username='+author).then((res)=>{
+      console.log(res.data.data);
+      setRequests(res.data.data);
+    })
+  },[])
   return (
     <div className='App'>
     <div className='the-navbar'>
@@ -15,10 +30,23 @@ const NRequest = () => {
           <Link className='navlink' to='/client/new-request'>New Request</Link>
           <Link className='navlink' to='/client/requests/approved'>Confirmed Requests</Link>
           <Link className='navlink' to='/client/requests/not-approved'>Pending Requests</Link>
+          <Avatar round name={name} size={40}/>
         </div>
     </div>
-    <div className='the-bottom'>
-        
+    <div className='table-list'>
+        <h2 style={{fontFamily:"Montserrat",color:"white"}}>Pending Requests</h2>
+        <ul className='listbox'>
+          <div className='list-item'>
+            <h3>Report ID</h3>
+            <p>Report Title</p>
+            <p>Report Type</p>
+            <p>Report Status</p>
+            <p>Assigned To</p>
+          </div>
+          <div className='item'>
+
+          </div>
+        </ul>
     </div>
 </div>
   )
