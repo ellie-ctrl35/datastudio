@@ -1,10 +1,12 @@
-import React from 'react';
+import {useContext} from 'react';
 import './Client.css';
 import { Link } from 'react-router-dom';
 import Logo from '../resources/Studio.png';
 import Avatar from 'react-avatar';
+import { AuthContext } from '../Context/AuthContext';
 
 const CRequest = () => {
+  const {userInfo} = useContext(AuthContext);
   return (
     <div className='App'>
         <div className='the-navbar'>

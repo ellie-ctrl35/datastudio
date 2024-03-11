@@ -7,6 +7,8 @@ import Admindash from './Admin/Admindash';
 import AllReports from './Admin/AllReports';
 import AddUser from './Admin/AddUser';
 import Allrequest from './Admin/Allrequest';
+import CreateReport from './Engineers/CreateReport';
+import ReportHistory from './Engineers/ReportHistory';
 import {AuthContext} from './Context/AuthContext';
 import {useContext,useEffect} from 'react';
 
@@ -31,7 +33,8 @@ function App() {
         <Route path="/admin/add-user" element={<AddUser />} />
         <Route path="/admin/all-requests" element={<Allrequest />} />
 
-        
+        <Route path="/engineers/create-report" element={<CreateReport />} />
+        <Route path="/engineers/report-history" element={<ReportHistory />} />
       </Routes>
     </BrowserRouter>
   );

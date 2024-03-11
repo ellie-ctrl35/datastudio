@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = (username, email, password, phone, role, comAssociate,lat,long) => {
-    return axios.post("http://localhost:5000/api/auth/register", { username, email, password, phone, role, comAssociate,lat,long})
+    return axios.post("http://localhost:4000/register", { username, email, password, phone, role, comAssociate,lat,long})
       .then(res => res.status === 200 && console.log("Registration successful"))
       .catch(error => console.error("Registration error in InfoContext", error));
   };
