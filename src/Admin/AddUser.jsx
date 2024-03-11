@@ -6,7 +6,7 @@ import Avatar from 'react-avatar';
 
 const AddUser = () => {
   return (
-    <div>
+    <div className='App'>
       <div className='the-navbar'>
             <div className='logo-cont'>
             <img src={Logo} alt='Studio' />
