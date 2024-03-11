@@ -1,8 +1,12 @@
 import React from 'react'
+import './Admin.css'
+import { Link } from 'react-router-dom';
+import Logo from '../resources/Studio.png';
+import Avatar from 'react-avatar';
 
 const Allrequest = () => {
   return (
-    <div>
+    <div className='App'>
       <div className='the-navbar'>
             <div className='logo-cont'>
             <img src={Logo} alt='Studio' />
