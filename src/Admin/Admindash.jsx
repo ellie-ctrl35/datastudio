@@ -1,8 +1,9 @@
 import React from 'react'
+import './Admin.css'
 
 const Admindash = () => {
   return (
-    <div>Admindash</div>
+    <div className='App'>Admindash</div>
   )
 }
 
