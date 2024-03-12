@@ -5,7 +5,8 @@ import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
-import { toast } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddUser = () => {
   const { userInfo } = useContext(AuthContext);
@@ -15,6 +16,17 @@ const AddUser = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState("");
+  const [users, setUsers] = useState([]);
+  const [added, setAdded] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/users")
+      .then(res => {
+        console.log(res);
+        setUsers(res.data.data)
+      })
+      .catch(error => console.error("Error fetching users", error));
+  }, [added]);
 
   const createUser = (e) => {
     e.preventDefault();
@@ -22,6 +34,7 @@ const AddUser = () => {
     axios.post("http://localhost:8080/register", { username, email, password, phone, role })
       .then(res => {
         console.log(res);
+        setAdded(res.data);
         if(res.status === 200){
           toast.success("User added successfully");
         } else {
@@ -83,6 +96,7 @@ const AddUser = () => {
             </form>
          </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
