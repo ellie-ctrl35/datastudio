@@ -41,5 +41,18 @@
     width: 95%;
     height: 85%;
     background: white;
-    margin-top: 2%;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.userlist{
+    width: 50%;
+    height: 98%;
+    background: yellow;
+}
+.userform{
+    background: turquoise;
+    width: 40%;
+    height: 98%;
 }

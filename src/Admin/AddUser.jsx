@@ -34,7 +34,12 @@ const AddUser = () => {
       </div>
 
       <div className="adduser-bottom">
+         <div className="userlist">
 
+         </div>
+         <div className="userform">
+
+         </div>
       </div>
     </div>
   );
