@@ -16,15 +16,10 @@ const Login = () => {
     e.preventDefault();
     Login(email, password)
       .then(() => {
-        navigate("/client/new-request"); // Navigate to the desired route after successful login
+        navigate("/admin/dashboard"); // Navigate to the desired route after successful login
         
-        if (status === 200) { // Check if the status is 200 (OK)
+        // Check if the status is 200 (OK)
           toast.success('Login successful');
-          navigate('/client/new-request'); // Navigate after showing the toast
-        } else {
-          // Handle other statuses or errors
-          toast.error('Login failed');
-        }
         
       })
       .catch((err) => {
