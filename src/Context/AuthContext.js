@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
           setUserToken(token);
           localStorage.setItem("userInfo", JSON.stringify(UserInfo));
           localStorage.setItem("userToken", token);
+          return res.status;
         })
         .catch((error) => {
           console.error("Login error from infoContext", error);

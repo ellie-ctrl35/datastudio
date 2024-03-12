@@ -28,14 +28,14 @@ const NewRequest = () => {
     axios.post("http://localhost:8080/sendrequest", data).then((res) => {
       console.log(res);
       if (res.status === 201) {
-        setTitle("");
-        setDesc("");
-        setType("");
         toast.success("Request sent successfully");
-      } else if (res.status === 500) {
-        toast.error("Request not sent");
+      } else {
+        toast.error("Request not sent")
       }
-    });
+    })
+      setTitle(null);
+      setDesc(null);
+      setType(null);
   };
 
   return (
@@ -59,7 +59,7 @@ const NewRequest = () => {
         </div>
       </div>
       <div className="the-bottom">
-        <h2 style={{ fontFamily: "Montserrat", color: "white" }}>New Report</h2>
+        <h2 style={{ fontFamily: "Montserrat", color: "white" }}>New Request</h2>
         <p
           style={{
             fontFamily: "Montserrat",
@@ -79,7 +79,7 @@ const NewRequest = () => {
               marginTop: "2%",
             }}
           >
-            Report Title
+            Request Title
           </label>
           <input
             onChange={(e) => setTitle(e.target.value)}
@@ -94,7 +94,7 @@ const NewRequest = () => {
               marginTop: "2%",
             }}
           >
-            Report Type
+            Request Type
           </label>
           <select onChange={(e) => setType(e.target.value)} value={type}>
             <option value="" disabled>
