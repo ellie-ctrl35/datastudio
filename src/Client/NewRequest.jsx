@@ -5,10 +5,13 @@ import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewRequest = () => {
   const { userInfo } = useContext(AuthContext);
   const name = userInfo.username;
+  const email = userInfo.email;
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [type, setType] = useState("");
@@ -19,11 +22,19 @@ const NewRequest = () => {
       title,
       desc,
       type,
-      author: name,
+      author: email,
     };
     console.log(data);
-    axios.post("http://localhost:4000/sendrequest", data).then((res) => {
+    axios.post("http://localhost:8080/sendrequest", data).then((res) => {
       console.log(res);
+      if (res.status === 201) {
+        setTitle("");
+        setDesc("");
+        setType("");
+        toast.success("Request sent successfully");
+      } else if (res.status === 500) {
+        toast.error("Request not sent");
+      }
     });
   };
 
@@ -86,10 +97,14 @@ const NewRequest = () => {
             Report Type
           </label>
           <select onChange={(e) => setType(e.target.value)} value={type}>
-  <option value="" disabled>Select one</option>
-  <option value="CMReport">CM REPORT</option>
-  <option value="PMReport">PM REPORT</option>
-</select>
+            <option value="" disabled>
+              Select one
+            </option>
+            <option value="CMReport">CM REPORT</option>
+            <option value="PMReport">PM REPORT</option>
+            <option value="PPMReport">PPM REPORT</option>
+            <option value="regular">Regular</option>
+          </select>
 
           <label
             style={{
@@ -112,6 +127,7 @@ const NewRequest = () => {
           <button style={{ fontWeight: 700 }}>Create Request</button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

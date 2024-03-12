@@ -11,27 +11,27 @@ export const AuthProvider = ({ children }) => {
 
   const Login = (email, password) => {
     try {
-      return axios.post("http://localhost:4000/login", { email, password })
-      .then((res) => {
-        console.log(res);
-        const { email, role, token, username,id } = res.data;
-        const UserInfo = { email, role, username,id,};
-        console.log('The userInfo:',UserInfo);
-        setUserInfo(UserInfo);
-        setUserToken(token);
-        localStorage.setItem("userInfo", JSON.stringify(UserInfo));
-        localStorage.setItem("userToken", token);
-      })
-      .catch((error) => {
-        console.error("Login error from infoContext", error);
-        setLoading(false);
-        throw error;
-      });
+      return axios.post("http://localhost:8080/login", { email, password })
+        .then((res) => {
+          console.log(res);
+          const { email, role, token, username, id } = res.data;
+          const UserInfo = { email, role, username, id, };
+          console.log('The userInfo:', UserInfo);
+          setUserInfo(UserInfo);
+          setUserToken(token);
+          localStorage.setItem("userInfo", JSON.stringify(UserInfo));
+          localStorage.setItem("userToken", token);
+        })
+        .catch((error) => {
+          console.error("Login error from infoContext", error);
+          setLoading(false);
+          throw error;
+        });
     } catch (error) {
       console.log("error from frontend")
     }
   };
-  
+
   // Helper function to clear user info and token
   const clearUserInfo = () => {
     setUserToken(null);
@@ -40,8 +40,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userToken");
   };
 
-  const register = (username, email, password, phone, role, comAssociate,lat,long) => {
-    return axios.post("http://localhost:4000/register", { username, email, password, phone, role, comAssociate,lat,long})
+  const register = (username, email, password, phone, role, comAssociate, lat, long) => {
+    return axios.post("http://localhost:4000/register", { username, email, password, phone, role, comAssociate, lat, long })
       .then(res => res.status === 200 && console.log("Registration successful"))
       .catch(error => console.error("Registration error in InfoContext", error));
   };
@@ -62,10 +62,10 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-useEffect(() =>{ isLogged()}, []);
+  useEffect(() => { isLogged() }, []);
 
   return (
-    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, userRequests, register,isLogged}}>
+    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, userRequests, register, isLogged }}>
       {children}
     </AuthContext.Provider>
   );
