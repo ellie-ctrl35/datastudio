@@ -24,6 +24,10 @@ const Admindash = () => {
               <Avatar round name={name} size={40}/>
             </div>
         </div>
+        <div className='Admindash-container'>
+          <div className='figures-container'></div>
+          <div className='chart-container'></div>
+        </div>
     </div>
   )
 }

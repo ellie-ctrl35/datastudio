@@ -78,3 +78,26 @@
     display: flex;
     flex-direction: row;
 }
+.Admindash-container{
+    width: 98%;
+    height: 85%;
+    background: red;
+    align-self: center;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+}
+.figures-container{
+    width: 20%;
+    height: 98%;
+    background: purple;
+    display: flex;
+}
+.charts-container{
+    width: 78%;
+    height: 98%;
+    background: orange;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
