@@ -14,22 +14,20 @@ const Allrequest = () => {
   const [requests, setRequests] = useState([]);
   const [getEngineers, setGetEngineers] = useState([]);
 
-  const assignRequest = (e) => {
-    e.preventDefault();
-    const engineer = e.target[0].value;
-    const title = e.target[1].value;
-    axios.post("http://localhost:8080/assignrequest", { engineer, title })
+  const assignRequest = (engineerUsername, requestId) => {
+    axios.post("http://localhost:8080/assignrequest", { engineerUsername, requestId })
       .then(res => {
-        console.log(res);
-        if(res.status === 200){
-          toast.success("Request assigned successfully");
-        } else {
-          toast.error("Request not assigned")
-        }
-      }
-    )
-      .catch(error => console.error("Error assigning request", error));
-  }
+          if(res.status === 200){
+              toast.success("Request assigned successfully");
+          } else {
+              toast.error("Request not assigned");
+          }
+      })
+      .catch(error => {
+          console.error("Error assigning request", error);
+          toast.error("Error assigning request");
+      });
+}
 
   useEffect(() => {
     axios.get("http://localhost:8080/getallrequests")
@@ -63,21 +61,21 @@ const Allrequest = () => {
         </div>
         <div className='request-container'>
    <ul className='request-list'>
-        {requests.map((request, index) => (
-            <div key={index} className='request'>
-                <h3>{request.title}</h3>
-                <p>{request.type}</p>
-                <p>{request.author}</p>
-                {
-                  getEngineers.map((engineer, index) => (
-                    <select key={index} name='engineer'  id='engineer'>
-                        <option value={engineer.username}>{engineer.username}</option>
-                    </select>
-                  ))
-                }
-                <button onClick={assignRequest}>Assign</button>
-            </div>
-        ))}
+   {requests.map((request) => (
+      <div key={request._id} className='request'>
+        <h3>{request.title}</h3>
+        <p>{request.type}</p>
+        <p>{request.author}</p>
+        <select name='engineer' style={{height:'2rem'}} id={`engineer-${request._id}`}>
+         {getEngineers.map((engineer) => (
+          <option key={engineer._id} value={engineer.username}>{engineer.username}</option>
+          ))}
+        </select>
+        <button onClick={() => assignRequest(document.getElementById(`engineer-${request._id}`).value, request._id)}>
+          Assign
+        </button>
+      </div>
+      ))}
    </ul>
         </div>
         <ToastContainer />
