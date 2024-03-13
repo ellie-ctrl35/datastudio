@@ -22,19 +22,35 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        {
+          userToken ? (
+             userInfo.role === "client" ? (
+              <>
+              <Route path="/client/new-request" element={<NewRequest />} />
+              <Route path='/client/requests/approved' element={<CRequest/>}/>
+              <Route path='/client/requests/not-approved' element={<NRequest/>}/>
+              </>
+             ) : userInfo.role === "engineer" ? (
+              <>
+              <Route path="/engineers/create-report" element={<CreateReport />} />
+              <Route path="/engineers/report-history" element={<ReportHistory />} />
+              </>
+             ) : (
+              <>
+                <Route path="/admin/dashboard" element={<Admindash />} />
+                <Route path="/admin/all-reports" element={<AllReports />} />
+                <Route path="/admin/add-user" element={<AddUser />} />
+                <Route path="/admin/all-requests" element={<Allrequest />} />
+              </>
+              )
 
-        <Route path="/client/new-request" element={<NewRequest />} />
-        <Route path='/client/requests/approved' element={<CRequest/>}/>
-        <Route path='/client/requests/not-approved' element={<NRequest/>}/>
+          ):(
+            <>
+            <Route path="/" element={<Login />} />
+            </>
+          )
+        }
 
-        <Route path="/admin/dashboard" element={<Admindash />} />
-        <Route path="/admin/all-reports" element={<AllReports />} />
-        <Route path="/admin/add-user" element={<AddUser />} />
-        <Route path="/admin/all-requests" element={<Allrequest />} />
-
-        <Route path="/engineers/create-report" element={<CreateReport />} />
-        <Route path="/engineers/report-history" element={<ReportHistory />} />
       </Routes>
     </BrowserRouter>
   );
