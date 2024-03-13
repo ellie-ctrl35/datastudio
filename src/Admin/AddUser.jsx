@@ -73,9 +73,20 @@ const AddUser = () => {
       </div>
 
       <div className="adduser-bottom">
-         <div className="userlist">
-
-         </div>
+         <ul className="userlist">
+          {
+            users.map((user, index) => {
+              return (
+                <div key={index} className="user">
+                  <h3>{user.username}</h3>
+                  <p>{user.email}</p>
+                  <p>{user.phone}</p>
+                  <p>{user.role}</p>
+                </div>
+              )
+            })
+          }
+         </ul>
          <div className="userform">
             <h1>Add User</h1>
             <form onSubmit={createUser}>
