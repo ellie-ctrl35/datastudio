@@ -60,3 +60,9 @@
     flex-direction: column;
     gap: 1rem;
 }
+.request-container{
+    width: 98%;
+    height: 85%;
+    background: dodgerblue;
+    margin-top: 1%;
+}
