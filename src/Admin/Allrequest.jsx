@@ -13,12 +13,15 @@ const Allrequest = () => {
   const name = userInfo.username;
   const [requests, setRequests] = useState([]);
   const [getEngineers, setGetEngineers] = useState([]);
+  const [updateCount, setUpdateCount] = useState(0);
+
 
   const assignRequest = (engineerUsername, requestId) => {
     axios.post("http://localhost:8080/assignrequest", { engineerUsername, requestId })
       .then(res => {
           if(res.status === 200){
               toast.success("Request assigned successfully");
+              setUpdateCount(prevCount => prevCount + 1);
           } else {
               toast.error("Request not assigned");
           }
@@ -43,7 +46,7 @@ const Allrequest = () => {
         setGetEngineers(res.data.data)
       })
       .catch(error => console.error("Error fetching engineers", error));
-  }, []);
+  }, [updateCount]);
   return (
     <div className='App'>
       <div className='the-navbar'>
@@ -75,9 +78,9 @@ const Allrequest = () => {
           Assign
         </button>
       </div>
-      ))}
+    ))}
    </ul>
-        </div>
+  </div>
         <ToastContainer />
     </div>
   )
