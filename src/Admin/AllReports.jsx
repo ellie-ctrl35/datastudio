@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Logo from '../resources/Studio.png';
 import Avatar from 'react-avatar';
+import './Admin.css'
+import axios from 'axios';
+import { AuthContext } from "../Context/AuthContext";
 
 const AllReports = () => {
   return (
@@ -12,10 +15,10 @@ const AllReports = () => {
             <h1>Data Studio</h1>
             </div>
             <div className='navlinks-cont'>
-              <Link className='navlink' to='/client/new-request'>Dashboard</Link>
-              <Link className='navlink' to='/client/requests/approved'>Reports</Link>
-              <Link className='navlink' to='/client/requests/not-approved'>All Requests</Link>
-              <Link className='navlink' to='/client/requests/not-approved'>Add User</Link>
+            <Link className='navlink' to='/admin/dashboard'>Dashboard</Link>
+              <Link className='navlink' to='/admin/all-reports'>Reports</Link>
+              <Link className='navlink' to='/admin/all-requests'>All Requests</Link>
+              <Link className='navlink' to='/admin/add-user'>Add User</Link>
               <Avatar round name="Emmanuel Nyatepe" size={40}/>
             </div>
       </div>
