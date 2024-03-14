@@ -33,7 +33,7 @@ const Admindash = () => {
         <span className='figure-sub'>/ 5</span>
       </div>
     </div>
-    <div className='figure-item'>
+    <div className='figure-item' style={{background:"#adada4",color:"black"}}>
       <h2>Total Balance</h2>
       <div className='figure'>
         <span className='figure-main'>1.592</span>
@@ -41,6 +41,13 @@ const Admindash = () => {
       </div>
     </div>
     <div className='figure-item'>
+      <h2>MJ Fast Hours</h2>
+      <div className='figure'>
+        <span className='figure-main'>6.9</span>
+        <span className='figure-sub'>/ 15H</span>
+      </div>
+    </div>
+    <div className='figure-item' style={{background:"#adada4",color:"black"}}>
       <h2>MJ Fast Hours</h2>
       <div className='figure'>
         <span className='figure-main'>6.9</span>
@@ -70,6 +77,9 @@ const Admindash = () => {
     </div>
   </div>
 </div>
+<div style={{background:"yellow",height:"40%",width:"95%",marginTop:"0"}}>
+
+  </div>
 
     </div>
   )
