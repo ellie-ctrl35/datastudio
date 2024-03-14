@@ -24,10 +24,53 @@ const Admindash = () => {
               <Avatar round name={name} size={40}/>
             </div>
         </div>
-        <div className='Admindash-container'>
-          <div className='figures-container'></div>
-          <div className='chart-container'></div>
-        </div>
+<div className='Admindash-container'>
+  <div className='figures-container'>
+    <div className='figure-item'>
+      <h2>Completed Tasks</h2>
+      <div className='figure'>
+        <span className='figure-main'>2</span>
+        <span className='figure-sub'>/ 5</span>
+      </div>
+    </div>
+    <div className='figure-item'>
+      <h2>Total Balance</h2>
+      <div className='figure'>
+        <span className='figure-main'>1.592</span>
+        <div className='figure-bar-chart'></div> 
+      </div>
+    </div>
+    <div className='figure-item'>
+      <h2>MJ Fast Hours</h2>
+      <div className='figure'>
+        <span className='figure-main'>6.9</span>
+        <span className='figure-sub'>/ 15H</span>
+      </div>
+    </div>
+  </div>
+  <div className='chart-container'>
+    <div className='chart-item'>
+      <div className='chart-api-usage'>
+        <h2>ChatGPT API Usage</h2>
+        <div className='chart-circle'></div>
+      </div>
+    </div>
+    <div className='chart-item'>
+      <div className='chart-work-life-balance'>
+        <h2>Work-Life Balance</h2>
+        <div className='chart-circle'></div>
+      </div>
+    </div>
+    <div className='chart-item'>
+      <div className='chart-custom-dashboard'>
+        <h2>Custom Dashboard</h2>
+        <span>10/20 Templates</span>
+        <div className='chart-navigation'></div> 
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
   )
 }
