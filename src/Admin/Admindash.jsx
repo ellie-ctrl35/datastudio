@@ -27,14 +27,19 @@ const Admindash = () => {
 <div className='Admindash-container'>
   <div className='figures-container'>
     <div className='figure-item'>
-      <h2>Completed Tasks</h2>
+      <h2>Completed Requests</h2>
       <div className='figure'>
-        <span className='figure-main'>2</span>
-        <span className='figure-sub'>/ 5</span>
+        
+      </div>
+    </div>
+    <div className='figure-item'>
+      <h2>Daily Requests</h2>
+      <div className='figure'>
+        
       </div>
     </div>
     <div className='figure-item' style={{background:"#adada4",color:"black"}}>
-      <h2>Total Balance</h2>
+      <h2>Total Number of Reports</h2>
       <div className='figure'>
         <span className='figure-main'>1.592</span>
         <div className='figure-bar-chart'></div> 
