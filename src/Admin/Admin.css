@@ -85,16 +85,17 @@
     padding: 20px;
 }
   
-  .figure-item, .chart-item {
+.figure-item, .chart-item {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-  }
+}
   
   .figure-item h2, .chart-item h2 {
     font-size: 0.85rem;
     color: #bbbbbb;
     margin-bottom: 10px;
+    font-family: 'Inter';
   }
   
   /* Figures Container styles */
