@@ -46,14 +46,14 @@ const Admindash = () => {
       </div>
     </div>
     <div className='figure-item'>
-      <h2>MJ Fast Hours</h2>
+      <h2>Confirmed Reports</h2>
       <div className='figure'>
         <span className='figure-main'>6.9</span>
         <span className='figure-sub'>/ 15H</span>
       </div>
     </div>
     <div className='figure-item' style={{background:"#adada4",color:"black"}}>
-      <h2>MJ Fast Hours</h2>
+      <h2>UnAssigned Requests</h2>
       <div className='figure'>
         <span className='figure-main'>6.9</span>
         <span className='figure-sub'>/ 15H</span>
