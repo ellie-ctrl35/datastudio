@@ -6,7 +6,7 @@ import Avatar from 'react-avatar';
 import axios from 'axios';
 import { AuthContext } from "../Context/AuthContext";
 
-const CreateReport = () => {
+const AssignedRequest = () => {
   return (
     <div className='App'>
        <div className="the-navbar">
@@ -34,4 +34,4 @@ const CreateReport = () => {
   )
 }
 
-export default CreateReport
+export default AssignedRequest
