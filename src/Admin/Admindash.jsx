@@ -85,4 +85,4 @@ const Admindash = () => {
   )
 }
 
-export default Admindash
+export default Admindash;

@@ -1,4 +1,4 @@
-import {useContext,useState}from 'react'
+import {useContext} from 'react'
 import './Engineer.css'
 import { Link } from 'react-router-dom';
 import Logo from '../resources/Studio.png';
@@ -6,9 +6,9 @@ import Avatar from 'react-avatar';
 import axios from 'axios';
 import { AuthContext } from "../Context/AuthContext";
 
-const CreateReport = () => {
-  const {userInfo}=useContext(AuthContext);
-  const name = userInfo.username;
+const AssignedRequest = () => {
+    const {userInfo}=useContext(AuthContext);
+    const name = userInfo.username;
   return (
     <div className='App'>
        <div className="the-navbar">
@@ -36,4 +36,4 @@ const CreateReport = () => {
   )
 }
 
-export default CreateReport
+export default AssignedRequest
