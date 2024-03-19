@@ -29,11 +29,13 @@ function App() {
               <Route path="/client/new-request" element={<NewRequest />} />
               <Route path='/client/requests/approved' element={<CRequest/>}/>
               <Route path='/client/requests/not-approved' element={<NRequest/>}/>
+              <Route path="/" element={<Navigate replace to="/client/new-request" />} />
               </>
              ) : userInfo.role === "engineer" ? (
               <>
               <Route path="/engineers/create-report" element={<CreateReport />} />
               <Route path="/engineers/report-history" element={<ReportHistory />} />
+              <Route path="/" element={<Navigate replace to="/engineers/report-history" />} />
               </>
              ) : (
               <>
@@ -41,12 +43,14 @@ function App() {
                 <Route path="/admin/all-reports" element={<AllReports />} />
                 <Route path="/admin/add-user" element={<AddUser />} />
                 <Route path="/admin/all-requests" element={<Allrequest />} />
+                <Route path="/" element={<Navigate replace to="/admin/dashboard" />} />
               </>
               )
 
           ):(
             <>
             <Route path="/" element={<Login />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
             </>
           )
         }

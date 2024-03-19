@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  const [userRequests, setUserRequests] = useState([]);
 
   const Login = (email, password) => {
     try {
@@ -66,7 +65,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => { isLogged() }, []);
 
   return (
-    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, userRequests, register, isLogged }}>
+    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, register, isLogged }}>
       {children}
     </AuthContext.Provider>
   );

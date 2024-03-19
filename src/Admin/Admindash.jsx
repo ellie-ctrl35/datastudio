@@ -7,7 +7,7 @@ import axios from 'axios';
 import { AuthContext } from "../Context/AuthContext";
 
 const Admindash = () => {
-  const {userInfo} = useContext(AuthContext);
+  const {userInfo,logout} = useContext(AuthContext);
   const name = userInfo.username;
   return (
     <div className='App'>
@@ -21,6 +21,7 @@ const Admindash = () => {
               <Link className='navlink' to='/admin/all-reports'>Reports</Link>
               <Link className='navlink' to='/admin/all-requests'>All Requests</Link>
               <Link className='navlink' to='/admin/add-user'>Add User</Link>
+              <button onClick={()=>logout()} className='navlink' to='/admin/add-user'>Logout</button>
               <Avatar round name={name} size={40}/>
             </div>
         </div>
@@ -41,6 +42,13 @@ const Admindash = () => {
       </div>
     </div>
     <div className='figure-item'>
+      <h2>MJ Fast Hours</h2>
+      <div className='figure'>
+        <span className='figure-main'>6.9</span>
+        <span className='figure-sub'>/ 15H</span>
+      </div>
+    </div>
+    <div className='figure-item' style={{background:"#adada4",color:"black"}}>
       <h2>MJ Fast Hours</h2>
       <div className='figure'>
         <span className='figure-main'>6.9</span>
