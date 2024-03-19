@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 
 const CreateReport = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo,logout } = useContext(AuthContext);
   const name = userInfo.username;
   return (
     <div className="App">
@@ -23,6 +23,7 @@ const CreateReport = () => {
           <Link className="navlink" to="engineers/report-history">
             Reports History
           </Link>
+          <button className="navlink" onClick={()=>logout()}>Logout</button>
           <Avatar round name={name} size={40} />
         </div>
       </div>

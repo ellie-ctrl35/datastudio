@@ -41,7 +41,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    background: white;
-    height: 80%;
+    width: 90%;
+    margin-top: 2%;
+    background: dodgerblue;
+    height: 83%;
 }
