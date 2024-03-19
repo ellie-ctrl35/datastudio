@@ -18,16 +18,10 @@ const CreateReport = () => {
         </div>
         <div className="navlinks-cont">
           <Link className="navlink" to="/admin/dashboard">
-            Dashboard
+            Create Report
           </Link>
           <Link className="navlink" to="/admin/all-reports">
-            Reports
-          </Link>
-          <Link className="navlink" to="/admin/all-requests">
-            All Requests
-          </Link>
-          <Link className="navlink" to="/admin/add-user">
-            Add User
+            Reports History
           </Link>
           <Avatar round name={name} size={40} />
         </div>
