@@ -37,3 +37,11 @@
     background-color: white;
     color: black;
 }
+.bottom-half{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    background: white;
+    height: 80%;
+}

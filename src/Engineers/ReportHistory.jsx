@@ -17,10 +17,10 @@ const ReportHistory = () => {
           <h1>Data Studio</h1>
         </div>
         <div className="navlinks-cont">
-          <Link className="navlink" to="/admin/dashboard">
+          <Link className="navlink" to="/engineers/create-report">
             Create Report
           </Link>
-          <Link className="navlink" to="/admin/all-reports">
+          <Link className="navlink" to="engineers/report-history">
             Reports History
           </Link>
           <Avatar round name={name} size={40} />
