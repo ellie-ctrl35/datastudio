@@ -16,7 +16,7 @@ const Login = () => {
     e.preventDefault();
     Login(email, password)
       .then(() => {
-        navigate("/admin/dashboard"); // Navigate to the desired route after successful login
+        navigate("/"); // Navigate to the desired route after successful login
         
         // Check if the status is 200 (OK)
           toast.success('Login successful');
