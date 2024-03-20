@@ -10,12 +10,19 @@ const CreateReport = () => {
   const { userInfo,logout } = useContext(AuthContext);
   const name = userInfo.username;
 
-  useEffect(() => { 
-    console.log(name)
-    axios.post('http://localhost:8080/getassignedrequest',name).then((res)=>{
-      console.log(res.data)
-    })
-  },[]);
+  useEffect(() => {
+    // Ensure that 'name' is encoded properly in case of special characters.
+    const encodedName = encodeURIComponent(name);
+  
+    axios.get(`http://localhost:8080/getassignedrequest?name=${encodedName}`)
+      .then((res) => {
+        console.log(res.data); // Now you can use res.data to display the reports
+      })
+      .catch((error) => {
+        console.error("Failed to fetch assigned requests:", error);
+      });
+  }, [name]); // Depend on 'name' to re-fetch if it changes
+  
   
   return (
     <div className="App">
