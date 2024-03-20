@@ -138,7 +138,7 @@ setIsModalOpen(false);
           <Link className="navlink" to="/engineers/create-report">
             Create Report
           </Link>
-          <Link className="navlink" to="engineers/report-history">
+          <Link className="navlink" to="/engineers/report-history">
             Reports History
           </Link>
           <button className="navlink" onClick={()=>logout()}>Logout</button>
