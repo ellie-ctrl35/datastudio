@@ -57,6 +57,7 @@ const CreateReport = () => {
               <p>{request._id}</p>
               <p>{request.type}</p>
               <p>{request.author}</p>
+              <button className="createbtn">Create Report</button>
             </li>
           ))}
         </ul>

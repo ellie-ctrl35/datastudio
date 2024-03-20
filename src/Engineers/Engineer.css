@@ -71,3 +71,19 @@
     border-bottom: solid 1px white;
     margin-left: -3%;
 }
+.createbtn{
+    width: 7rem;
+    height: 2.2rem;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 0.2rem;
+    font-family: "Inter";
+}
+.createbtn:hover{
+    background: black;
+    color: white;
+    border: 1px white solid;
+    transition: 0.7s ease-in-out;
+    transform: scaleX(1.07);
+}
