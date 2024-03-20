@@ -8,7 +8,7 @@ import {toast,ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Context/AuthContext";
 
-const ReportCreationModal = ({ isOpen, onClose, onSubmit, defaultValues = {} }) => {
+const ReportCreationModal = ({ isOpen, onClose, onSubmit, defaultValues = {}, selectedRequestId }) => {
   const { userInfo } = useContext(AuthContext);
   const engineer = userInfo.username;
   const [facilityName, setFacilityName] = useState(defaultValues.facilityName || '');
@@ -23,25 +23,49 @@ const ReportCreationModal = ({ isOpen, onClose, onSubmit, defaultValues = {} }) 
 
   if (!isOpen) return null;
 
+  const makeReport = (e) => {
+    e.preventDefault();
+    const reportDetails = {
+      Engineer: engineer,
+      FacilityName: facilityName,
+      EquipmentName: equipmentName,
+      SerialNumber: serialNumber,
+      modelNumber: modelNumber,
+      ProblemDesc: problemDesc,
+      WorkDone: workDone,
+      FurtherWorks: furtherWorks,
+      FurtherWorkDesc: furtherWorkDesc,
+      type: reportType,
+      requestId: selectedRequestId,
+    };
+    console.log("Report Details: ", reportDetails);
+    axios.post("http://localhost:8080/createreport", reportDetails)
+      .then((res) => {
+        console.log(res.data);
+        toast.success("Report Created Successfully");
+        setFacilityName("");
+        setEquipmentName("");
+        setSerialNumber("");
+        setModelNumber("");
+        setProblemDesc("");
+        setWorkDone("");
+        setFurtherWorks("false");
+        setFurtherWorkDesc("");
+        setReportType("");
+        onClose();
+        onSubmit(reportDetails);
+      })
+      .catch((error) => {
+        console.error("Failed to create report:", error);
+        toast.error("Failed to create report");
+      });
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <h2 style={{color:"black"}}>Create Report</h2>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit({
-            Engineer: engineer,
-            FacilityName: facilityName,
-            EquipmentName: equipmentName,
-            SerialNumber: serialNumber,
-            modelNumber: modelNumber,
-            ProblemDesc: problemDesc,
-            WorkDone: workDone,
-            FurtherWorks: furtherWorks,
-            FurtherWorkDesc: furtherWorkDesc,
-            type: reportType,
-          });
-        }}>
+        <form onSubmit={makeReport}>
           {/* Add form inputs here, matching the schema fields */}
           <h2 style={{color:"black"}}>{engineer}</h2>
           <input value={facilityName} onChange={(e) => setFacilityName(e.target.value)} placeholder="Facility Name" />
@@ -82,8 +106,9 @@ const CreateReport = () => {
 
   const handleReportSubmit = (reportDetails) => {
     console.log("Report Details: ", reportDetails);
-    // Here you would typically make an API call to submit these details
-    setIsModalOpen(false); // Close modal after submit
+    // When you open the modal for a specific request// Ensure requestId is correctly included
+setIsModalOpen(false);
+
   };
 
   useEffect(() => {
@@ -127,24 +152,25 @@ const CreateReport = () => {
           <p>Client</p>
         </div>
         <ul className="request-list">
-          {assignedRequest.map((request) => (
-            <li className="thelist" key={request._id}>
-              <p>{request._id}</p>
-              <p>{request.type}</p>
-              <p>{request.author}</p>
-              <button className="createbtn" onClick={() => {
-              setSelectedNotification(request);
-              setIsModalOpen(true);
-            }}>Create Report</button>
-            </li>
-          ))}
+        {assignedRequest.map((request) => (
+  <li className="thelist" key={request._id}>
+    <p>{request._id}</p>
+    <p>{request.type}</p>
+    <p>{request.author}</p>
+    <button className="createbtn" onClick={() => {
+      setSelectedNotification(request); // Correctly capturing the request object here
+      setIsModalOpen(true);
+    }}>Create Report</button>
+  </li>
+))}
         </ul>
       </div>
       <ReportCreationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleReportSubmit}
-        defaultValues={selectedNotification || {}}
+       isOpen={isModalOpen}
+       onClose={() => setIsModalOpen(false)}
+       onSubmit={handleReportSubmit}
+       defaultValues={selectedNotification || {}}
+       selectedRequestId={selectedNotification?._id} // Pass this to the modal
       />
       <ToastContainer/>
     </div>
