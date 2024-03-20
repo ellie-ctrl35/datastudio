@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import "./Engineer.css";
 import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
@@ -9,6 +9,10 @@ import { AuthContext } from "../Context/AuthContext";
 const CreateReport = () => {
   const { userInfo,logout } = useContext(AuthContext);
   const name = userInfo.username;
+
+  useEffect(() => { 
+  });
+  
   return (
     <div className="App">
       <div className="the-navbar">
@@ -28,7 +32,14 @@ const CreateReport = () => {
         </div>
       </div>
       <div className="bottom-half">
+        <div className="head">
+          <p>Request ID</p>
+          <p>Request Type</p>
+          <p>Client</p>
+        </div>
+        <ul className="request-list">
 
+        </ul>
       </div>
     </div>
   );

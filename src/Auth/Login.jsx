@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState ,useEffect} from "react";
 import "./Auth.css";
 import Logo from "../resources/Studio.png";
 import { AuthContext } from "../Context/AuthContext";
@@ -53,7 +53,6 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
       </div>
-      <button onClick={() => logout()}>Log out</button>
       <ToastContainer />
     </div>
   );
