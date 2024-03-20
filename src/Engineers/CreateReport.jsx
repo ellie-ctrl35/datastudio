@@ -9,6 +9,7 @@ import { AuthContext } from "../Context/AuthContext";
 const CreateReport = () => {
   const { userInfo,logout } = useContext(AuthContext);
   const name = userInfo.username;
+  const [assignedRequest,setAssignedRequest] = useState([]);
 
   useEffect(() => {
     // Ensure that 'name' is encoded properly in case of special characters.
@@ -17,6 +18,8 @@ const CreateReport = () => {
     axios.get(`http://localhost:8080/getassignedrequest?name=${encodedName}`)
       .then((res) => {
         console.log(res.data); // Now you can use res.data to display the reports
+        setAssignedRequest(res.data.data);
+        console.log("assigned Request",assignedRequest)
       })
       .catch((error) => {
         console.error("Failed to fetch assigned requests:", error);
@@ -49,7 +52,13 @@ const CreateReport = () => {
           <p>Client</p>
         </div>
         <ul className="request-list">
-
+          {assignedRequest.map((request) => (
+            <li className="thelist" key={request._id}>
+              <p>{request._id}</p>
+              <p>{request.type}</p>
+              <p>{request.author}</p>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

@@ -61,4 +61,13 @@
     overflow-y: scroll;
     min-height: min-content;
     width: 93%;
+    background: inherit;
+}
+.thelist{
+    display: flex;
+    flex-direction: row;
+    gap: 15%;
+    align-items: center;
+    border-bottom: solid 1px white;
+    margin-left: -3%;
 }
