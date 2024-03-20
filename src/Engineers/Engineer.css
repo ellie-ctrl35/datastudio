@@ -69,6 +69,7 @@
     align-items: center;
     border-bottom: solid 1px white;
     margin-left: -3%;
+    font-family: 'Inter';
 }
 .createbtn{
     width: 7rem;
@@ -103,5 +104,6 @@
     padding: 20px;
     border-radius: 5px;
     height: 90vh;
+    width: 70vw;
   }
   

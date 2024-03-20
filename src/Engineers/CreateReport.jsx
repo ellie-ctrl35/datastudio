@@ -4,26 +4,29 @@ import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import axios from "axios";
+import {toast,ToastContainer} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Context/AuthContext";
 
 const ReportCreationModal = ({ isOpen, onClose, onSubmit, defaultValues = {} }) => {
-  const [engineer, setEngineer] = useState('');
-  const [facilityName, setFacilityName] = useState('');
-  const [equipmentName, setEquipmentName] = useState('');
-  const [serialNumber, setSerialNumber] = useState('');
-  const [modelNumber, setModelNumber] = useState('');
-  const [problemDesc, setProblemDesc] = useState('');
-  const [workDone, setWorkDone] = useState('');
-  const [furtherWorks, setFurtherWorks] = useState('false');
-  const [furtherWorkDesc, setFurtherWorkDesc] = useState('');
-  const [reportType, setReportType] = useState('');
+  const { userInfo } = useContext(AuthContext);
+  const engineer = userInfo.username;
+  const [facilityName, setFacilityName] = useState(defaultValues.facilityName || '');
+  const [equipmentName, setEquipmentName] = useState(defaultValues.equipmentName || '');
+  const [serialNumber, setSerialNumber] = useState(defaultValues.serialNumber || '');
+  const [modelNumber, setModelNumber] = useState(defaultValues.modelNumber || '');
+  const [problemDesc, setProblemDesc] = useState(defaultValues.problemDesc || '');
+  const [workDone, setWorkDone] = useState(defaultValues.workDone || '');
+  const [furtherWorks, setFurtherWorks] = useState(defaultValues.furtherWorks || 'false');
+  const [furtherWorkDesc, setFurtherWorkDesc] = useState(defaultValues.furtherWorkDesc || '');
+  const [reportType, setReportType] = useState(defaultValues.type || '');
 
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Create Report</h2>
+        <h2 style={{color:"black"}}>Create Report</h2>
         <form onSubmit={(e) => {
           e.preventDefault();
           onSubmit({
@@ -40,7 +43,7 @@ const ReportCreationModal = ({ isOpen, onClose, onSubmit, defaultValues = {} }) 
           });
         }}>
           {/* Add form inputs here, matching the schema fields */}
-          <input value={engineer} onChange={(e) => setEngineer(e.target.value)} placeholder="Engineer" required />
+          <h2 style={{color:"black"}}>{engineer}</h2>
           <input value={facilityName} onChange={(e) => setFacilityName(e.target.value)} placeholder="Facility Name" />
           <input value={equipmentName} onChange={(e) => setEquipmentName(e.target.value)} placeholder="Equipment Name" required />
           <input value={serialNumber} onChange={(e) => setSerialNumber(e.target.value)} placeholder="Serial Number" />
@@ -143,6 +146,7 @@ const CreateReport = () => {
         onSubmit={handleReportSubmit}
         defaultValues={selectedNotification || {}}
       />
+      <ToastContainer/>
     </div>
   );
 };
