@@ -11,7 +11,11 @@ const CreateReport = () => {
   const name = userInfo.username;
 
   useEffect(() => { 
-  });
+    console.log(name)
+    axios.post('http://localhost:8080/getassignedrequest',name).then((res)=>{
+      console.log(res.data)
+    })
+  },[]);
   
   return (
     <div className="App">
@@ -20,7 +24,7 @@ const CreateReport = () => {
           <img src={Logo} alt="Studio" />
           <h1>Data Studio</h1>
         </div>
-        <div className="navlinks-cont">
+        <div className="navlinks-cont2">
           <Link className="navlink" to="/engineers/create-report">
             Create Report
           </Link>
