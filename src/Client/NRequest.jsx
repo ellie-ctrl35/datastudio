@@ -9,16 +9,15 @@ import axios from 'axios'
 const NRequest = () => {
   const {userInfo}= useContext(AuthContext);
   console.log(userInfo)
-  //const author = userInfo.email;
   
-  //const name = userInfo.username;
+  const name = userInfo.username;
   const [requests,setRequests] = useState([]);
- {/* useEffect(()=>{
-    axios.get('http://localhost:4000/getreports?username='+author).then((res)=>{
+ useEffect(()=>{
+    axios.get('http://localhost:8080/getcreatedreports?name='+name).then((res)=>{
       console.log(res.data.data);
       setRequests(res.data.data);
     })
-  },[])*/}
+  },[])
   return (
     <div className='App'>
     <div className='the-navbar'>
@@ -43,9 +42,13 @@ const NRequest = () => {
             <p>Report Status</p>
             <p>Assigned To</p>
           </div>
-          <div className='item'>
+          {
+            requests.map((request)=>{
+              <div className='item' key={request._id}>
 
-          </div>
+              </div>
+            })
+          }
         </ul>
     </div>
 </div>

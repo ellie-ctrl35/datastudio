@@ -7,6 +7,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 const CRequest = () => {
   const { userInfo,logout } = useContext(AuthContext);
+  const name = userInfo.username;
   return (
     <div className="App">
       <div className="the-navbar">
