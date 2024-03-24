@@ -89,13 +89,13 @@ const Admindash = () => {
         <div className="chart-container">
           <div className="chart-item">
             <div className="chart-api-usage">
-              <h2>ChatGPT API Usage</h2>
+              <h2>Report Type Distribution </h2>
               <div className="chart-circle"></div>
             </div>
           </div>
           <div className="chart-item">
             <div className="chart-work-life-balance">
-              <h2>Work-Life Balance</h2>
+              <h2>Request Type Distribution</h2>
               <div className="chart-circle"></div>
             </div>
           </div>
