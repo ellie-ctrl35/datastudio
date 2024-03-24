@@ -196,7 +196,14 @@
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
   }
-  
+  .barchart{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: yellow;
+    height: 44%;
+  }
   /* Responsive considerations */
   @media (max-width: 768px) {
     .figures-container, .chart-container {

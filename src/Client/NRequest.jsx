@@ -10,11 +10,12 @@ const NRequest = () => {
   const {userInfo}= useContext(AuthContext);
   console.log(userInfo)
   
+  const author = userInfo.email;
   const name = userInfo.username;
   const [requests,setRequests] = useState([]);
  useEffect(()=>{
-    axios.get('http://localhost:8080/getcreatedreports?name='+name).then((res)=>{
-      console.log(res.data.data);
+    axios.get('http://localhost:8080/getmyrequest?author='+author).then((res)=>{
+      console.log("pure response",res.data.data);
       setRequests(res.data.data);
     })
   },[])
@@ -29,7 +30,7 @@ const NRequest = () => {
           <Link className='navlink' to='/client/new-request'>New Request</Link>
           <Link className='navlink' to='/client/requests/approved'>Confirmed Requests</Link>
           <Link className='navlink' to='/client/requests/not-approved'>Pending Requests</Link>
-          <Avatar round name="Emmanuel Nyatepe" size={40}/>
+          <Avatar round name={name} size={40}/>
         </div>
     </div>
     <div className='table-list'>
