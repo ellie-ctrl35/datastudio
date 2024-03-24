@@ -52,14 +52,14 @@ const Admindash = () => {
             className="figure-item"
             style={{ background: "#adada4", color: "black" }}
           >
-            <h2>Total Balance</h2>
+            <h2>Daily Reports</h2>
             <div className="figure">
               <span className="figure-main">1.592</span>
               <div className="figure-bar-chart"></div>
             </div>
           </div>
           <div className="figure-item">
-            <h2>MJ Fast Hours</h2>
+            <h2>Reports Total</h2>
             <div className="figure">
               <span className="figure-main">6.9</span>
               <span className="figure-sub">/ 15H</span>
@@ -69,7 +69,7 @@ const Admindash = () => {
             className="figure-item"
             style={{ background: "#adada4", color: "black" }}
           >
-            <h2>MJ Fast Hours</h2>
+            <h2>Request Total</h2>
             <div className="figure">
               <span className="figure-main">6.9</span>
               <span className="figure-sub">/ 15H</span>
@@ -79,7 +79,7 @@ const Admindash = () => {
             className="figure-item"
             style={{ background: "#adada4", color: "black" }}
           >
-            <h2>MJ Fast Hours</h2>
+            <h2>Uncompleted Requests</h2>
             <div className="figure">
               <span className="figure-main">6.9</span>
               <span className="figure-sub">/ 15H</span>
