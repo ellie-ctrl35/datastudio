@@ -107,4 +107,14 @@
     height: 90vh;
     width: 70vw;
   }
+
+  @media (min-width: 400px) {
+    .App{
+        width: 100%;
+    }
+    .logo-cont h1{
+        font-size: 0.8rem;
+    }
+    
+  }
   
