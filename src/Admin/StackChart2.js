@@ -21,7 +21,7 @@ import {
   );
   
 
-const ReportChart = () => {
+const RequestChart = () => {
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: []
@@ -29,7 +29,7 @@ const ReportChart = () => {
 
   const fetchReportCounts = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/request-counts-last-10-days');
+      const response = await axios.get('http://localhost:8080/report-counts-last-10-days');
       const data = response.data;
   
       // Extract unique days and sort them
@@ -73,13 +73,13 @@ const ReportChart = () => {
     <div>
       {chartData.labels.length > 0 && (
         <Bar
-        key={chartData.labels.join(",")}
+        key={chartData.labels.join(",,")}
           data={chartData}
           options={{
             plugins: {
               title: {
                 display: true,
-                text: 'Request Counts by Type',
+                text: 'Report Counts by Type',
               },
             },
             scales: {
@@ -98,4 +98,4 @@ const ReportChart = () => {
   
 };
 
-export default ReportChart;
+export default RequestChart;
