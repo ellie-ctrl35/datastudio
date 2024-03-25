@@ -31,35 +31,46 @@ const ReportChart = () => {
     try {
       const response = await axios.get('http://localhost:8080/report-counts-last-10-days');
       const data = response.data;
-      const types = data.map(item => item._id);
-      const counts = data.map(item => item.count);
-
+  
+      // Extract unique days and sort them
+      const days = [...new Set(data.map(item => item._id.day))].sort();
+  
+      // Extract unique types
+      const types = [...new Set(data.map(item => item._id.type))];
+  
+      // Initialize datasets with empty data arrays
+      const datasets = types.map(type => ({
+        label: type,
+        data: new Array(days.length).fill(0), // Initialize with zeroes
+        backgroundColor: type === 'PMReport' ? '#506385' : type === 'CMReport' ? '#adada4' : 'dodgerblue',
+        stack: 'Stack 0',
+      }));
+  
+      // Populate the datasets
+      data.forEach(item => {
+        const dayIndex = days.indexOf(item._id.day);
+        const typeIndex = types.indexOf(item._id.type);
+  
+        if (dayIndex !== -1 && typeIndex !== -1) {
+          datasets[typeIndex].data[dayIndex] = item.count;
+        }
+      });
+  
       setChartData({
-        labels: types,
-        datasets: [
-          {
-            label: 'Report Counts',
-            data: counts,
-            backgroundColor: types.map(type => {
-              if (type === 'PMReport') return 'yellow';
-              if (type === 'CMReport') return 'blue';
-              return 'dodgerblue'; // Assuming PPMReport should also be green as per the instructions
-            }),
-          },
-        ],
+        labels: days.map(day => `Day ${day}`), // Transform day numbers into labels
+        datasets,
       });
     } catch (error) {
       console.error('Error fetching report counts:', error);
     }
   };
-
+  
   useEffect(() => {
     fetchReportCounts();
   }, []);
 
   return (
     <div>
-      <h2>Report in the last 10 days</h2>
       {chartData.labels.length > 0 && (
         <Bar
         key={chartData.labels.join(",")}
