@@ -1,14 +1,41 @@
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import "./Admin.css";
 import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
+import ReportChart from "./StackedChart";
 
 const Admindash = () => {
   const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
+  const [completed,setCompleted]=useState('') 
+  const [Uncompleted,setUncompleted]=useState('')
+  const [ReportsTotal,setReportsTotal]=useState('')
+  const[requestTotal,setRequestTotal]=useState('')
+  const [dailyReports,setDailyReports]=useState('')
+  useEffect(()=>{
+   axios.get('http://localhost:8080/getcompletedtasks').then((res)=>{
+    setCompleted(res.data.data)
+   })
+   axios.get('http://localhost:8080/getuncompletedtasks').then((res)=>{
+    setUncompleted(res.data.data)
+   })
+   axios.get('http://localhost:8080/getallreportscount').then((res)=>{
+    
+    setReportsTotal(res.data.data)
+   })
+   axios.get('http://localhost:8080/getallrequestscount').then((res)=>{
+    
+     setRequestTotal(res.data.data)
+   })
+   axios.get('http://localhost:8080/reports-today').then((res)=>{
+      console.log("count",res.data.count)
+      setDailyReports(res.data.count)
+    })
+
+  },[])
   return (
     <div className="App">
       <div className="the-navbar">
@@ -44,8 +71,7 @@ const Admindash = () => {
           <div className="figure-item">
             <h2>Completed Tasks</h2>
             <div className="figure">
-              <span className="figure-main">2</span>
-              <span className="figure-sub">/ 5</span>
+              {completed}
             </div>
           </div>
           <div
@@ -54,15 +80,13 @@ const Admindash = () => {
           >
             <h2>Daily Reports</h2>
             <div className="figure">
-              <span className="figure-main">1.592</span>
-              <div className="figure-bar-chart"></div>
+              {dailyReports}
             </div>
           </div>
           <div className="figure-item">
             <h2>Reports Total</h2>
             <div className="figure">
-              <span className="figure-main">6.9</span>
-              <span className="figure-sub">/ 15H</span>
+              {ReportsTotal}
             </div>
           </div>
           <div
@@ -71,8 +95,7 @@ const Admindash = () => {
           >
             <h2>Request Total</h2>
             <div className="figure">
-              <span className="figure-main">6.9</span>
-              <span className="figure-sub">/ 15H</span>
+              {requestTotal}
             </div>
           </div>
           <div
@@ -81,8 +104,7 @@ const Admindash = () => {
           >
             <h2>Uncompleted Requests</h2>
             <div className="figure">
-              <span className="figure-main">6.9</span>
-              <span className="figure-sub">/ 15H</span>
+             {Uncompleted}
             </div>
           </div>
         </div>
@@ -109,7 +131,9 @@ const Admindash = () => {
         </div>
       </div>
       <div className="barchart">
-        <div className="barchart1"></div>
+        <div className="barchart1">
+          <ReportChart />
+        </div>
         <div className="barchart1"></div>
         <div className="piechart1"></div>
       </div>
