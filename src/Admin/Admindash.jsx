@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import ReportChart from "./StackedChart";
 import RequestChart from "./StackChart2";
-import MonthlyReportChart from "./Doughnut";
+import MonthlyReportChart from './MonthlyPie';
 
 const Admindash = () => {
   const { userInfo, logout } = useContext(AuthContext);
@@ -17,6 +17,7 @@ const Admindash = () => {
   const [ReportsTotal,setReportsTotal]=useState('')
   const[requestTotal,setRequestTotal]=useState('')
   const [dailyReports,setDailyReports]=useState('')
+
   useEffect(()=>{
    axios.get('http://localhost:8080/getcompletedtasks').then((res)=>{
     setCompleted(res.data.data)
@@ -25,11 +26,9 @@ const Admindash = () => {
     setUncompleted(res.data.data)
    })
    axios.get('http://localhost:8080/getallreportscount').then((res)=>{
-    
     setReportsTotal(res.data.data)
    })
    axios.get('http://localhost:8080/getallrequestscount').then((res)=>{
-    
      setRequestTotal(res.data.data)
    })
    axios.get('http://localhost:8080/reports-today').then((res)=>{
@@ -140,7 +139,7 @@ const Admindash = () => {
           <RequestChart />
         </div>
         <div className="piechart1">
-          <MonthlyReportChart/>
+          <MonthlyReportChart />
         </div>
       </div>
     </div>
