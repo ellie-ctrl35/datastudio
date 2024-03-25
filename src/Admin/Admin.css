@@ -209,14 +209,12 @@
   .barchart1{
     width: 38%;
     height: 98%;
-    border: 1px solid white;
     border-radius: 0.5rem;
     font-family: "Montserrat";
   }
   .piechart1{
     width: 22%;
     height: 98%;
-    border: 1px solid white;
     border-radius: 0.5rem;
   }
   /* Responsive considerations */
