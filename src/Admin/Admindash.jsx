@@ -7,6 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import ReportChart from "./StackedChart";
 import RequestChart from "./StackChart2";
+import MonthlyReportChart from "./Doughnut";
 
 const Admindash = () => {
   const { userInfo, logout } = useContext(AuthContext);
@@ -138,7 +139,9 @@ const Admindash = () => {
         <div className="barchart1">
           <RequestChart />
         </div>
-        <div className="piechart1"></div>
+        <div className="piechart1">
+          <MonthlyReportChart/>
+        </div>
       </div>
     </div>
   );
