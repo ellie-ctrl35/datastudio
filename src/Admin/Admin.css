@@ -78,10 +78,14 @@
   border-radius: 0.2rem;
 }
 .request-container{
-    width: 98%;
+    width: 90%;
     height: 85%;
-    background: dodgerblue;
+    border: white solid 1px;
+    border-radius: 0.5rem;
     margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .request-list{
     width: 98%;
@@ -94,6 +98,22 @@
     height: 10%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Montserrat';
+}
+.request-btn{
+  background: white;
+  color: black;
+  border-radius: 0.3rem;
+  font-family: "Montserrat";
+  width: 10%;
+  height: 55%;
+  margin-top: 0.8rem;
+  border: none;
+}
+.engineer-dropdown{
+  width: 15rem;
+  height: 95%;
 }
 .Admindash-container {
     display: flex;

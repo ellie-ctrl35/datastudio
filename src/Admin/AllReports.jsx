@@ -50,7 +50,7 @@ const AllReports = () => {
               <p>{request.SerialNumber}</p>
               <p>{request.type}</p>
               <p>{request.createdAt}</p>
-              <button>View Report</button>
+              <button className="request-btn">View Report</button>
             </div>
           ))}
         </ul>
