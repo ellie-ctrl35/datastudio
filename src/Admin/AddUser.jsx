@@ -88,18 +88,18 @@ const AddUser = () => {
           }
          </ul>
          <div className="userform">
-            <h1>Add User</h1>
+            <h1 style={{fontFamily:"Montserrat"}}>Add User</h1>
             <form onSubmit={createUser}>
               <label>Username</label>
-              <input onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Username" />
+              <input className="userform-input" onChange={(e)=>setUsername(e.target.value)} type="text" placeholder="Username" />
               <label>Email</label>
-              <input  onChange={(e)=>setEmail(e.target.value)} type="text" placeholder="Email" />
+              <input className="userform-input" onChange={(e)=>setEmail(e.target.value)} type="text" placeholder="Email" />
               <label>Password</label>
-              <input  onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
+              <input className="userform-input" onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
               <label>Phone</label>
-              <input  onChange={(e)=>setPhone(e.target.value)} type="text" placeholder="Phone" />
+              <input className="userform-input" onChange={(e)=>setPhone(e.target.value)} type="text" placeholder="Phone" />
               <label>Role</label>
-              <select onChange={(e)=>setRole(e.target.value)}>
+              <select className="userform-input" onChange={(e)=>setRole(e.target.value)}>
                 <option value="engineer">Engineer</option>
                 <option value="client">Client</option>
               </select>
