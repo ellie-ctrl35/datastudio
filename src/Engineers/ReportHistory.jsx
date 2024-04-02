@@ -54,7 +54,12 @@ const ReportHistory = () => {
               <p>{report._id}</p>
               <p>{report.FacilityName}</p>
               <p>{report.SerialNumber}</p>
-              <Link to={`/engineers/official-report/${report._id}`}>
+              <Link
+                to={{
+                  pathname: `/engineers/official-report/${report._id}`,
+                  state: { report }, // Passing the entire report object
+                }}
+              >
                 <button className="createbtn">View Report</button>
               </Link>
             </li>
