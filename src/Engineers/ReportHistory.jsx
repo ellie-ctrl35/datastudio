@@ -1,30 +1,38 @@
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Engineer.css";
 import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
+import ReportModal from "./ReportModal"; // Assuming you have a modal component for report details
 
 const ReportHistory = () => {
   const { userInfo } = useContext(AuthContext);
   const name = userInfo.username;
   const [createdReport, setCreatedReport] = useState([]);
+  const [selectedReport, setSelectedReport] = useState(null); // Track the selected report for modal
   useEffect(() => {
-    // Ensure that 'name' is encoded properly in case of special characters.
     const encodedName = encodeURIComponent(name);
 
     axios
       .get(`http://localhost:8080/getcreatedreports?name=${encodedName}`)
       .then((res) => {
-        console.log(res.data); // Now you can use res.data to display the reports
         setCreatedReport(res.data.data);
-        console.log("created Report", createdReport);
       })
       .catch((error) => {
         console.error("Failed to fetch created requests:", error);
       });
   }, [name]);
+
+  const openModal = (report) => {
+    setSelectedReport(report);
+  };
+
+  const closeModal = () => {
+    setSelectedReport(null);
+  };
+
   return (
     <div className="App">
       <div className="the-navbar">
@@ -54,18 +62,16 @@ const ReportHistory = () => {
               <p>{report._id}</p>
               <p>{report.FacilityName}</p>
               <p>{report.SerialNumber}</p>
-              <Link
-                to={{
-                  pathname: `/engineers/official-report/${report._id}`,
-                  state: { report }, // Passing the entire report object
-                }}
-              >
-                <button className="createbtn">View Report</button>
-              </Link>
+              <button className="createbtn" onClick={() => openModal(report)}>
+                View Report
+              </button>
             </li>
           ))}
         </ul>
       </div>
+      {selectedReport && (
+        <ReportModal report={selectedReport} onClose={closeModal} />
+      )}
     </div>
   );
 };
