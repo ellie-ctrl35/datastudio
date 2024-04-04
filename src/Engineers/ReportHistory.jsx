@@ -19,6 +19,7 @@ const ReportHistory = () => {
       .get(`http://localhost:8080/getcreatedreports?name=${encodedName}`)
       .then((res) => {
         setCreatedReport(res.data.data);
+        console.log(res.data.data);
       })
       .catch((error) => {
         console.error("Failed to fetch created requests:", error);
