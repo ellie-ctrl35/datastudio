@@ -6,7 +6,7 @@ import Avatar from "react-avatar";
 import { AuthContext } from "../Context/AuthContext";
 
 const CRequest = () => {
-  const { userInfo,logout } = useContext(AuthContext);
+  const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
   return (
     <div className="App">
@@ -25,7 +25,10 @@ const CRequest = () => {
           <Link className="navlink" to="/client/requests/not-approved">
             Pending Requests
           </Link>
-          <button onClick={()=>logout()}>Logout</button>
+          <Link className="navlink" to="/client/requests/not-approved">
+            Official Reports
+          </Link>
+          <button onClick={() => logout()}>Logout</button>
           <Avatar round name="Emmanuel Nyatepe" size={40} />
         </div>
       </div>

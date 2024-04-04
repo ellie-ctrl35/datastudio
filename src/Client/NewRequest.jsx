@@ -30,12 +30,12 @@ const NewRequest = () => {
       if (res.status === 201) {
         toast.success("Request sent successfully");
       } else {
-        toast.error("Request not sent")
+        toast.error("Request not sent");
       }
-    })
-      setTitle(null);
-      setDesc(null);
-      setType(null);
+    });
+    setTitle(null);
+    setDesc(null);
+    setType(null);
   };
 
   return (
@@ -55,11 +55,16 @@ const NewRequest = () => {
           <Link className="navlink" to="/client/requests/not-approved">
             Pending Requests
           </Link>
+          <Link className="navlink" to="/client/requests/not-approved">
+            Official Reports
+          </Link>
           <Avatar round name={name} size={40} />
         </div>
       </div>
       <div className="the-bottom">
-        <h2 style={{ fontFamily: "Montserrat", color: "white" }}>New Request</h2>
+        <h2 style={{ fontFamily: "Montserrat", color: "white" }}>
+          New Request
+        </h2>
         <p
           style={{
             fontFamily: "Montserrat",
