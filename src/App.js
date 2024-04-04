@@ -9,7 +9,6 @@ import AddUser from "./Admin/AddUser";
 import Allrequest from "./Admin/Allrequest";
 import CreateReport from "./Engineers/CreateReport";
 import ReportHistory from "./Engineers/ReportHistory";
-import OfficialReport from "./Engineers/OfficialReport";
 import { AuthContext } from "./Context/AuthContext";
 import { useContext, useEffect } from "react";
 
@@ -46,11 +45,6 @@ function App() {
               <Route
                 path="/engineers/report-history"
                 element={<ReportHistory />}
-              />
-
-              <Route
-                path="/engineers/official-report/:reportId"
-                element={<OfficialReport />}
               />
               <Route
                 path="/"

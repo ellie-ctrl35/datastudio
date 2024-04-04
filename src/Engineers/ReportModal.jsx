@@ -1,38 +1,41 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import "./Modal.css"; // Import the CSS file
 
 const ReportModal = ({ report, onClose }) => {
-  const componentRef = React.useRef();
+  const modalRef = useRef();
 
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: () => modalRef.current,
   });
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-    doc.autoTable({ html: '#report-details' });
-    doc.save('report.pdf');
+    doc.autoTable({ html: modalRef.current });
+    doc.save("report.pdf");
   };
 
-  return ReactDOM.createPortal(
-    <div className="modal">
-      <div className="modal-content" ref={componentRef}>
-        <div id="report-details">
-          <h2>Report Details</h2>
-          <p>Report ID: {report._id}</p>
-          <p>Facility Name: {report.FacilityName}</p>
-          <p>Serial Number: {report.SerialNumber}</p>
-          {/* Add more details as needed */}
+  return (
+    <>
+      <div className="overlay"></div>
+      <div className="modal">
+        <div className="modal-content" ref={modalRef}>
+          <div id="report-details">
+            <h2 style={{color:"balck",fontSize:"2rem"}}>Report Details</h2>
+            <p style={{color:"black"}}>Report ID: {report._id}</p>
+            <p style={{color:"black"}}>Facility Name: {report.FacilityName}</p>
+            <p style={{color:"black"}}>Serial Number: {report.SerialNumber}</p>
+            <p style={{color:"black"}}>Engineer's Remarks: {report.Remarks}</p>
+            
+          </div>
+          <button onClick={handlePrint}>Print Report</button>
+          <button onClick={handleDownloadPDF}>Download PDF</button>
+          <button onClick={onClose}>Close</button>
         </div>
-        <button onClick={handlePrint}>Print Report</button>
-        <button onClick={handleDownloadPDF}>Download PDF</button>
-        <button onClick={onClose}>Close</button>
       </div>
-    </div>,
-    document.getElementById("modal-root")
+    </>
   );
 };
 
