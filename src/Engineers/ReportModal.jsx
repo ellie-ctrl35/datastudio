@@ -1,35 +1,38 @@
-import React, { useRef,useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import html2canvas from "html2canvas"; // Import html2canvas
 import "./Modal.css"; // Import the CSS file
 
 const ReportModal = ({ report, onClose }) => {
+  const [modalContent, setModalContent] = useState("");
   const modalRef = useRef();
-
-  useEffect(() => {
-    // Ensure modalRef.current is assigned after modal content is mounted
-    modalRef.current = document.getElementById("report-details");
-  }, []);
 
   const handlePrint = useReactToPrint({
     content: () => modalRef.current,
   });
 
   const handleDownloadPDF = () => {
-    if (!modalRef.current) {
-      console.error("Modal content not available.");
-      return;
-    }
-    const doc = new jsPDF();
-    doc.autoTable({ html: modalRef.current });
-    doc.save("report.pdf");
+    // Use html2canvas to capture modal content as an image
+    html2canvas(modalRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+
+      // Initialize jsPDF
+      const pdf = new jsPDF();
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      // Add image to PDF
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("report.pdf");
+    });
   };
-  
 
   return (
     <>
-      {/*<div className="overlay" ></div>*/}
+      {/*<div className="overlay" onClick={onClose}></div>*/}
       <div className="modal">
         <div className="modal-content" ref={modalRef}>
           <div id="report-details">
