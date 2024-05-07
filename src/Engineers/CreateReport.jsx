@@ -36,7 +36,7 @@ const CreateReport = () => {
       .catch((error) => {
         console.error("Failed to fetch assigned requests:", error);
       });
-  }, [name]); // Depend on 'name' to re-fetch if it changes
+  }, [name,isModalOpen]); // Depend on 'name' to re-fetch if it changes
 
   return (
     <div className="App">
