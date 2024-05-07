@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const Login = (email, password) => {
     try {
-      return axios.post("http://localhost:5000/login", { email, password })
+      return axios.post("http://localhost:8080/login", { email, password })
         .then((res) => {
           console.log(res);
           if (res.status === 200) {
