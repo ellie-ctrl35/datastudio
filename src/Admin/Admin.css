@@ -91,7 +91,7 @@
     width: 98%;
     height: 98%;
     background: green;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .request{
     width: 90%;
@@ -100,6 +100,7 @@
     flex-direction: row;
     justify-content: space-between;
     font-family: 'Montserrat';
+    border-bottom: white 1px solid;
 }
 .request-btn{
   background: white;
