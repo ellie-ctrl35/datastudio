@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
@@ -6,8 +6,9 @@ import "./Admin.css";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import ReportModal from "./ReportModal";
-import Loader from "react-loader-spinner"; // Import loader
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"; // Import loader styles
+import { ThreeDots } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AllReports = () => {
   const [requests, setRequests] = useState([]);
@@ -22,11 +23,12 @@ const AllReports = () => {
       .then((res) => {
         console.log(res);
         setRequests(res.data.data);
-        setLoading(false);
+        setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {
         console.error("Error fetching requests", error);
-        setLoading(false);
+        setLoading(false); // Set loading to false on error
+        toast.error("Error fetching data"); // Display toast notification
       });
   }, []);
 
@@ -40,6 +42,7 @@ const AllReports = () => {
 
   return (
     <div className="App">
+      <ToastContainer /> {/* Toast container for notifications */}
       <div className="the-navbar">
         <div className="logo-cont">
           <img src={Logo} alt="Studio" />
@@ -63,13 +66,7 @@ const AllReports = () => {
       </div>
       <div className="request-container">
         {loading ? (
-          <Loader
-            type="ThreeDots"
-            color="#00BFFF"
-            height={100}
-            width={100}
-            timeout={3000} // 3 secs timeout
-          />
+          <ThreeDots color="#fff" height={80} width={80} />
         ) : (
           <ul className="request-list">
             {requests.map((request) => (

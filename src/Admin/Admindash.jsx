@@ -1,42 +1,47 @@
-import { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Admin.css";
 import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
+import { ThreeDots } from "react-loader-spinner";
 import ReportChart from "./StackedChart";
 import RequestChart from "./StackChart2";
 import MonthlyReportChart from './MonthlyPie';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const useDataFetch = (url) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get(url)
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((error) => {
+        toast.error("Error fetching data", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [url]);
+
+  return { data, loading };
+};
 
 const Admindash = () => {
   const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
-  const [completed,setCompleted]=useState('') 
-  const [Uncompleted,setUncompleted]=useState('')
-  const [ReportsTotal,setReportsTotal]=useState('')
-  const[requestTotal,setRequestTotal]=useState('')
-  const [dailyReports,setDailyReports]=useState('')
 
-  useEffect(()=>{
-   axios.get('http://localhost:8080/getcompletedtasks').then((res)=>{
-    setCompleted(res.data.data)
-   })
-   axios.get('http://localhost:8080/getuncompletedtasks').then((res)=>{
-    setUncompleted(res.data.data)
-   })
-   axios.get('http://localhost:8080/getallreportscount').then((res)=>{
-    setReportsTotal(res.data.data)
-   })
-   axios.get('http://localhost:8080/getallrequestscount').then((res)=>{
-     setRequestTotal(res.data.data)
-   })
-   axios.get('http://localhost:8080/reports-today').then((res)=>{
-      console.log("count",res.data.count)
-      setDailyReports(res.data.count)
-    })
+  const { data: completed, loading: loadingCompleted } = useDataFetch("http://localhost:8080/getcompletedtasks");
+  const { data: uncompleted, loading: loadingUncompleted } = useDataFetch("http://localhost:8080/getuncompletedtasks");
+  const { data: reportsTotal, loading: loadingReportsTotal } = useDataFetch("http://localhost:8080/getallreportscount");
+  const { data: requestTotal, loading: loadingRequestTotal } = useDataFetch("http://localhost:8080/getallrequestscount");
+  const { data: dailyReports, loading: loadingDailyReports } = useDataFetch("http://localhost:8080/reports-today");
 
-  },[])
   return (
     <div className="App">
       <div className="the-navbar">
@@ -57,11 +62,7 @@ const Admindash = () => {
           <Link className="navlink" to="/admin/add-user">
             Add User
           </Link>
-          <button
-            onClick={() => logout()}
-            className="navlink"
-            to="/admin/add-user"
-          >
+          <button onClick={() => logout()} className="navlink" to="/admin/add-user">
             Logout
           </button>
           <Avatar round name={name} size={40} />
@@ -72,40 +73,51 @@ const Admindash = () => {
           <div className="figure-item">
             <h2>Completed Tasks</h2>
             <div className="figure">
-              {completed}
+              {loadingCompleted ? (
+                <ThreeDots color="#fff" height={20} width={20} />
+              ) : (
+                completed
+              )}
             </div>
           </div>
-          <div
-            className="figure-item"
-            style={{ background: "#adada4", color: "black" }}
-          >
+          <div className="figure-item">
             <h2>Daily Reports</h2>
             <div className="figure">
-              {dailyReports}
+              {loadingDailyReports ? (
+                <ThreeDots color="#fff" height={20} width={20} />
+              ) : (
+                dailyReports
+              )}
             </div>
           </div>
           <div className="figure-item">
             <h2>Reports Total</h2>
             <div className="figure">
-              {ReportsTotal}
+              {loadingReportsTotal ? (
+                <ThreeDots color="#fff" height={20} width={20} />
+              ) : (
+                reportsTotal
+              )}
             </div>
           </div>
-          <div
-            className="figure-item"
-            style={{ background: "#adada4", color: "black" }}
-          >
+          <div className="figure-item">
             <h2>Request Total</h2>
             <div className="figure">
-              {requestTotal}
+              {loadingRequestTotal ? (
+                <ThreeDots color="#fff" height={20} width={20} />
+              ) : (
+                requestTotal
+              )}
             </div>
           </div>
-          <div
-            className="figure-item"
-            style={{ background: "#adada4", color: "black" }}
-          >
+          <div className="figure-item">
             <h2>Uncompleted Requests</h2>
             <div className="figure">
-             {Uncompleted}
+              {loadingUncompleted ? (
+                <ThreeDots color="#fff" height={20} width={20} />
+              ) : (
+                uncompleted
+              )}
             </div>
           </div>
         </div>
@@ -142,6 +154,7 @@ const Admindash = () => {
           <MonthlyReportChart />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
