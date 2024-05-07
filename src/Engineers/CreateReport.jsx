@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Engineer.css";
 import { Link } from "react-router-dom";
 import Logo from "../resources/Studio.png";
@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../Context/AuthContext";
 import ReportCreationModal from "./ReportCreationModal";
+import { ThreeDots } from "react-loader-spinner";
 
 const CreateReport = () => {
   const { userInfo, logout } = useContext(AuthContext);
@@ -15,6 +16,7 @@ const CreateReport = () => {
   const [assignedRequest, setAssignedRequest] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleReportSubmit = (reportDetails) => {
     console.log("Report Details: ", reportDetails);
@@ -31,10 +33,11 @@ const CreateReport = () => {
       .then((res) => {
         console.log(res.data); // Now you can use res.data to display the reports
         setAssignedRequest(res.data.data);
+        setLoading(false); // Set loading to false when data is fetched
         console.log("assigned Request", assignedRequest);
       })
       .catch((error) => {
-        console.error("Failed to fetch assigned requests:", error);
+        toast.error("Failed to fetch assigned requests:", error);
       });
   }, [name,isModalOpen]); // Depend on 'name' to re-fetch if it changes
 
@@ -64,24 +67,30 @@ const CreateReport = () => {
           <p>Request Type</p>
           <p>Client</p>
         </div>
-        <ul className="request-list">
-          {assignedRequest.map((request) => (
-            <li className="thelist" key={request._id}>
-              <p>{request._id}</p>
-              <p>{request.type}</p>
-              <p>{request.author}</p>
-              <button
-                className="createbtn"
-                onClick={() => {
-                  setSelectedNotification(request); // Correctly capturing the request object here
-                  setIsModalOpen(true);
-                }}
-              >
-                Create Report
-              </button>
-            </li>
-          ))}
-        </ul>
+        {loading ? (
+          <div className="loading-container">
+            <ThreeDots color="#fff" height={80} width={80} />
+          </div>
+        ) : (
+          <ul className="request-list">
+            {assignedRequest.map((request) => (
+              <li className="thelist" key={request._id}>
+                <p>{request._id}</p>
+                <p>{request.type}</p>
+                <p>{request.author}</p>
+                <button
+                  className="createbtn"
+                  onClick={() => {
+                    setSelectedNotification(request); // Correctly capturing the request object here
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Create Report
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <ReportCreationModal
         isOpen={isModalOpen}
