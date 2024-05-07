@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => { isLogged() }, []);
 
   return (
-    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, register, isLogged ,error}}>
+    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, register, isLogged ,error,setError}}>
       {children}
     </AuthContext.Provider>
   );

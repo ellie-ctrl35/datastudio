@@ -9,12 +9,13 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { Login, logout, error } = useContext(AuthContext); // Added error from context
+  const { Login, logout, error,setError } = useContext(AuthContext); // Added error from context
   const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
       toast.error(`Login error: ${error.message}`); // Display error toast
+      setError(null); // Reset error state
     }
   }, [error]);
 
@@ -29,7 +30,7 @@ const Login = () => {
         console.log("Login error: from Login.jsx", err);
       });
   };
-  
+
   return (
     <div className="main">
       <div className="the-navbar">
