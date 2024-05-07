@@ -1,4 +1,4 @@
-import { useContext, useState ,useEffect} from "react";
+import { useContext, useState, useEffect } from "react";
 import "./Auth.css";
 import Logo from "../resources/Studio.png";
 import { AuthContext } from "../Context/AuthContext";
@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { Login, logout, error,setError } = useContext(AuthContext); // Added error from context
+  const { Login, logout, error, setError } = useContext(AuthContext); // Added error from context
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,10 +21,15 @@ const Login = () => {
 
   const loginUser = (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please fill in all fields"); // Display error toast
+      return; // Prevent login function from running
+    }
+
     Login(email, password)
       .then(() => {
         navigate("/"); // Navigate to the desired route after successful login
-        toast.success('Login successful');
+        toast.success("Login successful");
       })
       .catch((err) => {
         console.log("Login error: from Login.jsx", err);
