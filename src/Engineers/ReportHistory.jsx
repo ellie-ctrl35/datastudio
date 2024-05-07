@@ -7,6 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import ReportModal from "./ReportModal"; // Assuming you have a modal component for report details
 import { ThreeDots } from "react-loader-spinner";
+import { ToastContainer,toast } from "react-toastify";
 
 const ReportHistory = () => {
   const { userInfo } = useContext(AuthContext);
@@ -16,7 +17,6 @@ const ReportHistory = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const encodedName = encodeURIComponent(name);
-
     axios
       .get(`http://localhost:8080/getcreatedreports?name=${encodedName}`)
       .then((res) => {
@@ -25,7 +25,7 @@ const ReportHistory = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Failed to fetch created requests:", error);
+        toast.error("Failed to fetch created reports:", error);
       });
   }, [name]);
 
@@ -39,6 +39,7 @@ const ReportHistory = () => {
 
   return (
     <div className="App">
+      <ToastContainer />
       <div className="the-navbar">
         <div className="logo-cont">
           <img src={Logo} alt="Studio" />
