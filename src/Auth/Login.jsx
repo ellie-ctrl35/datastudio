@@ -9,31 +9,29 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { Login, logout, error, setError } = useContext(AuthContext); // Added error from context
+  const { Login, logout, error, setError,isCredentialsLegit } = useContext(AuthContext); // Added error from context
   const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
       toast.error(`Login error: ${error.message}`); // Display error toast
       setError(null); // Reset error state
+    } else if (isCredentialsLegit) {
+      navigate("/"); // Navigate to the desired route after successful login
+      toast.success("Login successful");
     }
-  }, [error]);
-
+  }, [error, setError, isCredentialsLegit, navigate]);
   const loginUser = (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast.error("Please fill in all fields"); // Display error toast
+      toast.info("Please fill in all fields"); // Display error toast
       return; // Prevent login function from running
     }
 
     Login(email, password)
-      .then(() => {
-        navigate("/"); // Navigate to the desired route after successful login
-        toast.success("Login successful");
-      })
-      .catch((err) => {
-        console.log("Login error: from Login.jsx", err);
-      });
+    .catch((err) => {
+      console.log("Login error: from Login.jsx", err);
+    });
   };
 
   return (
