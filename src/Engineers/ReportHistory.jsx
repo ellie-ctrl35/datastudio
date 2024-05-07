@@ -6,12 +6,14 @@ import Avatar from "react-avatar";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import ReportModal from "./ReportModal"; // Assuming you have a modal component for report details
+import { ThreeDots } from "react-loader-spinner";
 
 const ReportHistory = () => {
   const { userInfo } = useContext(AuthContext);
   const name = userInfo.username;
   const [createdReport, setCreatedReport] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null); // Track the selected report for modal
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const encodedName = encodeURIComponent(name);
 
@@ -20,6 +22,7 @@ const ReportHistory = () => {
       .then((res) => {
         setCreatedReport(res.data.data);
         console.log(res.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Failed to fetch created requests:", error);
@@ -51,25 +54,32 @@ const ReportHistory = () => {
           <Avatar round name={name} size={40} />
         </div>
       </div>
-      <div className="bottom-half">
-        <div className="head">
-          <p>Report ID</p>
-          <p>Facility Name</p>
-          <p>Serial Number</p>
-        </div>
-        <ul className="request-list">
-          {createdReport.map((report) => (
-            <li className="thelist" key={report._id}>
-              <p>{report._id}</p>
-              <p>{report.FacilityName}</p>
-              <p>{report.SerialNumber}</p>
-              <button className="createbtn" onClick={() => openModal(report)}>
-                View Report
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      // Inside the return statement
+{loading ? (
+  <div className="loading-container">
+    <ThreeDots color="#fff" height={80} width={80} />
+  </div>
+) : (
+  <div className="bottom-half">
+    <div className="head">
+      <p>Report ID</p>
+      <p>Facility Name</p>
+      <p>Serial Number</p>
+    </div>
+    <ul className="request-list">
+      {createdReport.map((report) => (
+        <li className="thelist" key={report._id}>
+          <p>{report._id}</p>
+          <p>{report.FacilityName}</p>
+          <p>{report.SerialNumber}</p>
+          <button className="createbtn" onClick={() => openModal(report)}>
+            View Report
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
       {selectedReport && (
         <ReportModal report={selectedReport} onClose={closeModal} />
       )}
