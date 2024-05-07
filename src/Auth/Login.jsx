@@ -9,23 +9,27 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { Login, logout } = useContext(AuthContext);
+  const { Login, logout, error } = useContext(AuthContext); // Added error from context
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(`Login error: ${error.message}`); // Display error toast
+    }
+  }, [error]);
 
   const loginUser = (e) => {
     e.preventDefault();
     Login(email, password)
       .then(() => {
         navigate("/"); // Navigate to the desired route after successful login
-        
-        // Check if the status is 200 (OK)
-          toast.success('Login successful');
-        
+        toast.success('Login successful');
       })
       .catch((err) => {
         console.log("Login error: from Login.jsx", err);
       });
   };
+  
   return (
     <div className="main">
       <div className="the-navbar">

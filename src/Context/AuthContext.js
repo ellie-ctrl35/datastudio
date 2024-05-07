@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const [error, setError] = useState(null);
 
   const Login = (email, password) => {
     try {
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }) => {
         })
         .catch((error) => {
           console.error("Login error from infoContext", error);
+          setError(error.message); // Set error state with error message
           setLoading(false);
           throw error;
         });
@@ -64,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => { isLogged() }, []);
 
   return (
-    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, register, isLogged }}>
+    <AuthContext.Provider value={{ Login, logout, isLoading, userToken, userInfo, register, isLogged ,error}}>
       {children}
     </AuthContext.Provider>
   );
