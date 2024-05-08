@@ -9,12 +9,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const NewRequest = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
   const email = userInfo.email;
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [type, setType] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const sendRequest = (e) => {
     e.preventDefault();
@@ -42,6 +43,11 @@ const NewRequest = () => {
     });
   };
 
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="App">
       <div className="the-navbar">
@@ -62,7 +68,21 @@ const NewRequest = () => {
           <Link className="navlink" to="/client/requests/not-approved">
             Official Reports
           </Link>
-          <Avatar round name={name} size={40} />
+          
+            <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       <div className="the-bottom">
@@ -93,7 +113,6 @@ const NewRequest = () => {
           <input
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter a Tile for your Request"
-        
           />
           <label
             style={{
@@ -130,7 +149,7 @@ const NewRequest = () => {
             placeholder="Describe your report..."
             maxLength="200"
             className="desc"
-            style={{ fontFamily: "Montserrat", color: "white" }} // Add more styling as needed
+            style={{ fontFamily: "Montserrat", color: "white" }}
           ></textarea>
 
           <button style={{ fontWeight: 700 }}>Create Request</button>
@@ -142,3 +161,4 @@ const NewRequest = () => {
 };
 
 export default NewRequest;
+

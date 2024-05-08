@@ -130,3 +130,13 @@ option {
     font-family: 'Inter';
     color: #ffffff;
 }
+.avatar-menu {
+    position: absolute;
+    top: 50px; /* Adjust this value to position the menu below the avatar */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+}  
