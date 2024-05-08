@@ -132,11 +132,24 @@ option {
 }
 .avatar-menu {
     position: absolute;
-    top: 50px; /* Adjust this value to position the menu below the avatar */
-    right: 0;
-    background-color: white;
+    top: 55px; /* Adjust this value to position the menu below the avatar */
+    right: 30px;
+    background-color: #fff;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     z-index: 1;
-}  
+    width: 10%;
+    color: black;
+    font-family: "Inter";
+} 
+.avatar-menu button{
+    background-color: black;
+    color: white;
+    border: none;
+    font-family: "Inter";
+    font-size: 0.8rem;
+    width: 90%;
+    height: 30px;
+    border-radius: 0.3rem;
+}
