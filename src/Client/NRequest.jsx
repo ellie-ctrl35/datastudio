@@ -57,7 +57,13 @@ const NRequest = () => {
             <p>Assigned To</p>
           </div>
           {requests.map((request) => {
-            <div className="item" key={request._id}></div>;
+            <div className="item" key={request._id}>
+              <p>{request._id}</p>
+              <p>{request.title}</p>
+              <p>{request.type}</p>
+              <p>{request.status}</p>
+              <p>{request.assigned_to}</p>
+            </div>;
           })}
         </ul>
       </div>
