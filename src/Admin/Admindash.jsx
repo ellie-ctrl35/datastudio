@@ -16,12 +16,18 @@ import useDataFetch from "./useDataFetch";
 const Admindash = () => {
   const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
-
+  const email = userInfo.email;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: completed, loading: loadingCompleted } = useDataFetch("http://localhost:8080/getcompletedtasks");
   const { data: uncompleted, loading: loadingUncompleted } = useDataFetch("http://localhost:8080/getuncompletedtasks");
   const { data: reportsTotal, loading: loadingReportsTotal } = useDataFetch("http://localhost:8080/getallreportscount");
   const { data: requestTotal, loading: loadingRequestTotal } = useDataFetch("http://localhost:8080/getallrequestscount");
   const { data: dailyReports, loading: loadingDailyReports } = useDataFetch("http://localhost:8080/reports-today");
+
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
 
   return (
     <div className="App">
@@ -43,10 +49,21 @@ const Admindash = () => {
           <Link className="navlink" to="/admin/add-user">
             Add User
           </Link>
-          <button onClick={() => logout()} className="navlink" to="/admin/add-user">
-            Logout
-          </button>
-          <Avatar round name={name} size={40} />
+          
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       <div className="Admindash-container">
