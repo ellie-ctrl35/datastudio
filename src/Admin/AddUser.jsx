@@ -26,7 +26,7 @@ const AddUser = () => {
         console.log(res);
         setUsers(res.data.data)
       })
-      .catch(error => console.error("Error fetching users", error));
+      .catch(error => toast.error("Error fetching users", error));
   }, [added]);
 
   const handleLogout = () => {
@@ -52,7 +52,7 @@ const AddUser = () => {
         e.target[3].value = "";
         e.target[4].value = "";
       })
-      .catch(error => console.error("Registration error in InfoContext", error));
+      .catch(error => toast.error("Registration error in InfoContext", error));
   }
   return (
     <div className="App">
