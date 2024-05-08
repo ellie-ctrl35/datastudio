@@ -56,15 +56,15 @@ const NRequest = () => {
             <p>Report Status</p>
             <p>Assigned To</p>
           </div>
-          {requests.map((request) => {
+          {requests.map((request) => (
             <div className="item" key={request._id}>
-              <p>{request._id}</p>
+              <p>{request._id.substring(0, 8)}</p>
               <p>{request.title}</p>
               <p>{request.type}</p>
               <p>{request.status}</p>
-              <p>{request.assigned_to}</p>
-            </div>;
-          })}
+              <p>{request.AssignTo}</p>
+            </div>
+          ))}
         </ul>
       </div>
     </div>

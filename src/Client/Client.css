@@ -125,3 +125,8 @@ option {
     margin-top: 1rem;
     color: #ffffff;
 }
+.item p{
+    font-size: 1rem;
+    font-family: 'Inter';
+    color: #ffffff;
+}
