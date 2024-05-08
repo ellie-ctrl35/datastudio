@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ThreeDots } from "react-loader-spinner";
 
 const CRequest = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo,logout } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [errorDisplayed, setErrorDisplayed] = useState(false);
@@ -74,7 +74,7 @@ const CRequest = () => {
             {isMenuOpen && (
               <div className="avatar-menu">
                 <p>{name}</p>
-                <p>{email}</p>
+                <p>{author}</p>
                 <p>{userInfo.role}</p>
                 <button onClick={handleLogout}>Logout</button>
               </div>
