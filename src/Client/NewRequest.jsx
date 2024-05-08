@@ -29,14 +29,14 @@ const NewRequest = () => {
       console.log(res);
       if (res.status === 201) {
         toast.success("Request sent successfully");
-      } else {
+        setTitle("");
+        setDesc("");
+        setType("");
+      } else if (res.status === 500) {
         toast.error("Request not sent");
       }
     });
-    setTitle("");
-    setDesc("");
-    setType("");
-  };
+  };  
 
   return (
     <div className="App">
@@ -89,7 +89,7 @@ const NewRequest = () => {
           <input
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter a Tile for your Request"
-            type="text"
+        
           />
           <label
             style={{
