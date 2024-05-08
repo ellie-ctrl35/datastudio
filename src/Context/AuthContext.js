@@ -55,9 +55,7 @@ export const AuthProvider = ({ children }) => {
   };*/}
 
   const logout = () => {
-    setLoading(true);
     clearUserInfo();
-    setLoading(false);
   };
 
   const isLogged = () => {
