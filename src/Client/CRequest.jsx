@@ -14,6 +14,7 @@ const CRequest = () => {
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [errorDisplayed, setErrorDisplayed] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const author = userInfo.email;
   const name = userInfo.username;
 
@@ -39,6 +40,11 @@ const CRequest = () => {
       });
   }, [author, errorDisplayed]);
 
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="App">
       <div className="the-navbar">
@@ -59,7 +65,20 @@ const CRequest = () => {
           <Link className="navlink" to="/client/requests/not-approved">
             Official Reports
           </Link>
-          <Avatar round name={name} size={40} />
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       <div className="table-list">
