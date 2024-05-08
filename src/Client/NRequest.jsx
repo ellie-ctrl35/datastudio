@@ -22,7 +22,11 @@ const NRequest = () => {
       .get("http://localhost:8080/getmyrequest?author=" + author)
       .then((res) => {
         console.log("pure response", res.data.data);
-        setRequests(res.data.data);
+        // Filter requests with status "pending"
+        const filteredRequests = res.data.data.filter(
+          (request) => request.status === "pending"
+        );
+        setRequests(filteredRequests);
         setLoading(false);
       })
       .catch((error) => {
