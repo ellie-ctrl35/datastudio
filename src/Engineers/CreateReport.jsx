@@ -13,10 +13,12 @@ import { ThreeDots } from "react-loader-spinner";
 const CreateReport = () => {
   const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
+  const email = userInfo.email;
   const [assignedRequest, setAssignedRequest] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNotification, setSelectedNotification] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleReportSubmit = (reportDetails) => {
     console.log("Report Details: ", reportDetails);
@@ -41,6 +43,11 @@ const CreateReport = () => {
       });
   }, [name,isModalOpen]); // Depend on 'name' to re-fetch if it changes
 
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="App">
       <div className="the-navbar">
@@ -55,10 +62,20 @@ const CreateReport = () => {
           <Link className="navlink" to="/engineers/report-history">
             Reports History
           </Link>
-          <button className="navlink" onClick={() => logout()}>
-            Logout
-          </button>
-          <Avatar round name={name} size={40} />
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       <div className="bottom-half">

@@ -15,6 +15,8 @@ const ReportHistory = () => {
   const [createdReport, setCreatedReport] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null); // Track the selected report for modal
   const [loading, setLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   useEffect(() => {
     const encodedName = encodeURIComponent(name);
     axios

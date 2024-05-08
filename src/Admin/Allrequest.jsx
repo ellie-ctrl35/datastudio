@@ -9,11 +9,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Allrequest = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo ,logout} = useContext(AuthContext);
   const name = userInfo.username;
+  const email = userInfo.email;
   const [requests, setRequests] = useState([]);
   const [getEngineers, setGetEngineers] = useState([]);
   const [updateCount, setUpdateCount] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const assignRequest = (engineerUsername, requestId) => {
     axios
@@ -52,6 +54,11 @@ const Allrequest = () => {
       })
       .catch((error) => console.error("Error fetching engineers", error));
   }, [updateCount]);
+
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
   return (
     <div className="App">
       <div className="the-navbar">
@@ -72,7 +79,20 @@ const Allrequest = () => {
           <Link className="navlink" to="/admin/add-user">
             Add User
           </Link>
-          <Avatar round name={name} size={40} />
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       <div className="request-container">

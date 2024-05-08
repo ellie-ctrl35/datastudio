@@ -9,7 +9,7 @@ import { toast,ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddUser = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -18,6 +18,7 @@ const AddUser = () => {
   const [role, setRole] = useState("");
   const [users, setUsers] = useState([]);
   const [added, setAdded] = useState([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     axios.get("http://localhost:8080/users")
@@ -27,6 +28,11 @@ const AddUser = () => {
       })
       .catch(error => console.error("Error fetching users", error));
   }, [added]);
+
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
 
   const createUser = (e) => {
     e.preventDefault();
@@ -68,7 +74,20 @@ const AddUser = () => {
           <Link className="navlink" to="/admin/add-user">
             Add User
           </Link>
-          <Avatar round name={name} size={40} />
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
 

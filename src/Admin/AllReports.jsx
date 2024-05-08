@@ -13,9 +13,11 @@ import "react-toastify/dist/ReactToastify.css";
 const AllReports = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo,logout } = useContext(AuthContext);
   const name = userInfo.username;
+  const email = userInfo.email;
   const [selectedReport, setSelectedReport] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -31,6 +33,11 @@ const AllReports = () => {
         toast.error("Error fetching data"); // Display toast notification
       });
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
 
   const openModal = (request) => {
     setSelectedReport(request);
@@ -61,7 +68,20 @@ const AllReports = () => {
           <Link className="navlink" to="/admin/add-user">
             Add User
           </Link>
-          <Avatar round name={name} size={40} />
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       <div className="request-container">
