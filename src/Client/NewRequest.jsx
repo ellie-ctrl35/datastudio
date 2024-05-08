@@ -33,9 +33,9 @@ const NewRequest = () => {
         toast.error("Request not sent");
       }
     });
-    setTitle(null);
-    setDesc(null);
-    setType(null);
+    setTitle("");
+    setDesc("");
+    setType("");
   };
 
   return (

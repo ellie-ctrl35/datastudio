@@ -24,7 +24,7 @@ const NRequest = () => {
         console.log("pure response", res.data.data);
         // Filter requests with status "pending"
         const filteredRequests = res.data.data.filter(
-          (request) => request.status === "pending"
+          (request) => request.status === "Pending"
         );
         setRequests(filteredRequests);
         setLoading(false);
