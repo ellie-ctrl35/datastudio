@@ -5,22 +5,36 @@ import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ThreeDots } from "react-loader-spinner";
 
 const NRequest = () => {
   const { userInfo } = useContext(AuthContext);
-  console.log(userInfo);
-
+  const [loading, setLoading] = useState(true);
+  const [requests, setRequests] = useState([]);
+  const [errorDisplayed, setErrorDisplayed] = useState(false);
   const author = userInfo.email;
   const name = userInfo.username;
-  const [requests, setRequests] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/getmyrequest?author=" + author)
       .then((res) => {
         console.log("pure response", res.data.data);
         setRequests(res.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch requests:", error);
+        if (!errorDisplayed) {
+          setErrorDisplayed(true);
+          toast.error("Failed to fetch requests. Please try again later.");
+        }
+        setLoading(false);
       });
-  }, []);
+  }, [author, errorDisplayed]);
+
   return (
     <div className="App">
       <div className="the-navbar">
@@ -48,25 +62,30 @@ const NRequest = () => {
         <h2 style={{ fontFamily: "Montserrat", color: "white" }}>
           Pending Requests
         </h2>
-        <ul className="listbox">
-          <div className="list-item">
-            <h3>Report ID</h3>
-            <p>Report Title</p>
-            <p>Report Type</p>
-            <p>Report Status</p>
-            <p>Assigned To</p>
-          </div>
-          {requests.map((request) => (
-            <div className="item" key={request._id}>
-              <p>{request._id.substring(0, 8)}</p>
-              <p>{request.title}</p>
-              <p>{request.type}</p>
-              <p>{request.status}</p>
-              <p>{request.AssignTo}</p>
+        {loading ? (
+          <ThreeDots color="#fff" height={80} width={80} />
+        ) : (
+          <ul className="listbox">
+            <div className="list-item">
+              <h3>Report ID</h3>
+              <p>Report Title</p>
+              <p>Report Type</p>
+              <p>Report Status</p>
+              <p>Assigned To</p>
             </div>
-          ))}
-        </ul>
+            {requests.map((request) => (
+              <div className="item" key={request._id}>
+                <p>{request._id.substring(0, 8)}</p>
+                <p>{request.title}</p>
+                <p>{request.type}</p>
+                <p>{request.status}</p>
+                <p>{request.AssignTo}</p>
+              </div>
+            ))}
+          </ul>
+        )}
       </div>
+      <ToastContainer />
     </div>
   );
 };
