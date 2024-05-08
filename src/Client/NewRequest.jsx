@@ -18,6 +18,10 @@ const NewRequest = () => {
 
   const sendRequest = (e) => {
     e.preventDefault();
+    if (!title || !desc || !type) {
+      toast.info("Please fill in all fields.");
+      return;
+    }
     const data = {
       title,
       desc,
@@ -36,7 +40,7 @@ const NewRequest = () => {
         toast.error("Request not sent");
       }
     });
-  };  
+  };
 
   return (
     <div className="App">
