@@ -10,13 +10,14 @@ import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 
 const ReportHistory = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { userInfo,logout } = useContext(AuthContext);
   const name = userInfo.username;
+  const email = userInfo.email;
   const [createdReport, setCreatedReport] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null); // Track the selected report for modal
   const [loading, setLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     const encodedName = encodeURIComponent(name);
     axios
@@ -39,6 +40,11 @@ const ReportHistory = () => {
     setSelectedReport(null);
   };
 
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="App">
       <ToastContainer />
@@ -54,7 +60,20 @@ const ReportHistory = () => {
           <Link className="navlink" to="/engineers/report-history">
             Reports History
           </Link>
-          <Avatar round name={name} size={40} />
+          <Avatar
+              round
+              name={name}
+              size={40}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            />
+            {isMenuOpen && (
+              <div className="avatar-menu">
+                <p>{name}</p>
+                <p>{email}</p>
+                <p>{userInfo.role}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
         </div>
       </div>
       {loading ? (
