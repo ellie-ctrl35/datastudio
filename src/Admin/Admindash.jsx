@@ -11,26 +11,7 @@ import RequestChart from "./StackChart2";
 import MonthlyReportChart from './MonthlyPie';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const useDataFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios.get(url)
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((error) => {
-        toast.error("Error fetching data", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [url]);
-
-  return { data, loading };
-};
+import useDataFetch from "./useDataFetch";
 
 const Admindash = () => {
   const { userInfo, logout } = useContext(AuthContext);
