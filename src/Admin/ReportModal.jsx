@@ -1,13 +1,33 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import html2canvas from "html2canvas"; // Import html2canvas
 import "../Engineers/Modal.css"; // Import the CSS file
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ReportModal = ({ request, onClose }) => {
   const [modalContent, setModalContent] = useState("");
   const modalRef = useRef();
+  const [clients, setClients] = useState([]);
+  const [selectedClient, setSelectedClient] = useState("");
+  const [loadingClients, setLoadingClients] = useState(true);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/users")
+      .then((res) => {
+        console.log(res.data); // Check the structure of the response data
+        const users = res.data.data || []; // Safely access the data property
+        const filteredClients = users.filter(user => user.role === "client");
+        setClients(filteredClients);
+        setLoadingClients(false);
+      })
+      .catch((error) => {
+        toast.error("Failed to fetch clients");
+        setLoadingClients(false);
+      });
+  }, []);
 
   const handlePrint = useReactToPrint({
     content: () => modalRef.current,
@@ -30,9 +50,19 @@ const ReportModal = ({ request, onClose }) => {
     });
   };
 
+  const handleSendReport = () => {
+    axios.put(`http://localhost:8080/sendreport/${request._id}`, { sendTo: selectedClient })
+      .then(() => {
+        toast.success("Report sent successfully");
+        onClose();
+      })
+      .catch((error) => {
+        toast.error("Failed to send report");
+      });
+  };
+
   return (
     <>
-      {/*<div className="overlay" onClick={onClose}></div>*/}
       <div className="modal">
         <div className="modal-content" ref={modalRef}>
           <div id="report-details">
@@ -46,6 +76,26 @@ const ReportModal = ({ request, onClose }) => {
           </div>
           <button onClick={handlePrint}>Print Report</button>
           <button onClick={handleDownloadPDF}>Download PDF</button>
+          {!request.sent && (
+            <div className="send-report">
+              <select
+                value={selectedClient}
+                onChange={(e) => setSelectedClient(e.target.value)}
+                disabled={loadingClients}
+              >
+                <option value="">Select Client</option>
+                {clients.map(client => (
+                  <option key={client._id} value={client.username}>{client.username}</option>
+                ))}
+              </select>
+              <button
+                onClick={handleSendReport}
+                disabled={!selectedClient}
+              >
+                Send Report
+              </button>
+            </div>
+          )}
           <button onClick={onClose}>Close</button>
         </div>
       </div>

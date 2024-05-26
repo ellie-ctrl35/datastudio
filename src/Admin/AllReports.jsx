@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 const AllReports = () => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { userInfo,logout } = useContext(AuthContext);
+  const { userInfo, logout } = useContext(AuthContext);
   const name = userInfo.username;
   const email = userInfo.email;
   const [selectedReport, setSelectedReport] = useState(null);
@@ -84,7 +84,14 @@ const AllReports = () => {
             )}
         </div>
       </div>
-      <div className="request-container">
+      <div className="request-container" style={{display:"flex",flexDirection:"column"}}>
+        <div style={{width:"95%",height:"7%",display:"flex",flexDirection:"row",gap:"10%",fontFamily:"Inter",borderBottomColor:"#fff",borderBottomWidth:1}}>
+          <h1 style={{color:"white",fontSize:"17px",marginLeft:"3%"}}>Engineer</h1>
+          <h1 style={{color:"white",fontSize:"17px"}}>Facility Name</h1>
+          <h1 style={{color:"white",fontSize:"17px"}}>Serial Number</h1>
+          <h1 style={{color:"white",fontSize:"17px",marginLeft:"-3%"}}>Type</h1>
+          <h1 style={{color:"white",fontSize:"17px"}}>Equipment Name</h1>
+        </div>
         {loading ? (
           <ThreeDots color="dodgerblue" height={120} width={120} />
         ) : (
@@ -95,7 +102,7 @@ const AllReports = () => {
                 <p>{request.FacilityName}</p>
                 <p>{request.SerialNumber}</p>
                 <p>{request.type}</p>
-                <p>{request.createdAt}</p>
+                <p>{request.EquipmentName}</p>
                 <button
                   className="request-btn"
                   onClick={() => openModal(request)}

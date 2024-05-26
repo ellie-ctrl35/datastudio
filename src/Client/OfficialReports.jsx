@@ -80,7 +80,7 @@ const OfficialReports = () => {
             {isMenuOpen && (
               <div className="avatar-menu">
                 <p>{name}</p>
-                <p>{author}</p>
+               {/*<p>{author}</p>*/}
                 <p>{userInfo.role}</p>
                 <button onClick={handleLogout}>Logout</button>
               </div>
