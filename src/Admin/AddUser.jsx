@@ -97,7 +97,7 @@ const AddUser = () => {
             users.map((user, index) => {
               return (
                 <div key={index} className="user">
-                  <h3>{user.username}</h3>
+                  <h3 style={{width:"30%"}}>{user.username}</h3>
                   <p>{user.email}</p>
                   <p>{user.phone}</p>
                   <p>{user.role}</p>

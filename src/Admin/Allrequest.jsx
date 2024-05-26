@@ -7,6 +7,7 @@ import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ThreeDots } from "react-loader-spinner";
 
 const Allrequest = () => {
   const { userInfo ,logout} = useContext(AuthContext);
@@ -16,6 +17,7 @@ const Allrequest = () => {
   const [getEngineers, setGetEngineers] = useState([]);
   const [updateCount, setUpdateCount] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const assignRequest = (engineerUsername, requestId) => {
     axios
@@ -27,6 +29,7 @@ const Allrequest = () => {
         if (res.status === 200) {
           toast.success("Request assigned successfully");
           setUpdateCount((prevCount) => prevCount + 1);
+          
         } else {
           toast.error("Request not assigned");
         }
@@ -34,6 +37,7 @@ const Allrequest = () => {
       .catch((error) => {
         console.error("Error assigning request", error);
         toast.error("Error assigning request");
+        
       });
   };
 
@@ -43,8 +47,13 @@ const Allrequest = () => {
       .then((res) => {
         console.log(res);
         setRequests(res.data.data);
+        setLoading(false);
       })
-      .catch((error) => console.error("Error fetching requests", error));
+      .catch((error) => 
+        {
+          console.error("Error fetching requests", error)
+          setLoading(false);
+        });
 
     axios
       .get("http://localhost:8080/getallengineers")
@@ -96,7 +105,11 @@ const Allrequest = () => {
         </div>
       </div>
       <div className="request-container">
-        <ul className="request-list">
+      {
+            loading ?(
+              <ThreeDots color="dodgerblue" height={100} width={100}/>
+            ):(
+              <ul className="request-list">
           {requests.map((request) => (
             <div key={request._id} className="request">
               <h3>{request.title}</h3>
@@ -128,6 +141,9 @@ const Allrequest = () => {
             </div>
           ))}
         </ul>
+            )
+          }
+        
       </div>
       <ToastContainer />
     </div>

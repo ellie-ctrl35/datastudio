@@ -86,7 +86,7 @@ const AllReports = () => {
       </div>
       <div className="request-container">
         {loading ? (
-          <ThreeDots color="#fff" height={80} width={80} />
+          <ThreeDots color="dodgerblue" height={120} width={120} />
         ) : (
           <ul className="request-list">
             {requests.map((request) => (
