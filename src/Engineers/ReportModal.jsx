@@ -33,63 +33,65 @@ const ReportModal = ({ report, onClose }) => {
 
   return (
     <>
-      {/*<div className="overlay" onClick={onClose}></div>*/}
+      <div className="overlay" onClick={onClose}></div>
       <div className="modal">
         <div className="modal-content" ref={modalRef}>
           <div id="report-details">
-            <img src={Logo} alt="Logo" style={{ width: "100px", height: "100px",alignSelf:"center" }} />
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-  <tr>
-    <td style={{ width: '30%' }}>Name of Facility:</td>
-    <td style={{ width: '70%' }}><input type="text" value={report.FacilityName} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Equipment Name:</td>
-    <td><input type="text" value={report.EquipmentName} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>City/Town:</td>
-    <td><input type="text" value={report.CityTown} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Facility Asset No:</td>
-    <td><input type="text" value={report.FacilityAssetNo} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Model Number:</td>
-    <td><input type="text" value={report.ModelNumber} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Serial Number:</td>
-    <td><input type="text" value={report.SerialNumber} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Date(s):</td>
-    <td><input type="text" value={report.Date} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Problem Description:</td>
-    <td><textarea value={report.ProblemDescription} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Work Done:</td>
-    <td><textarea value={report.WorkDone} style={{ width: '100%' }} /></td>
-  </tr>
-  
-  <tr>
-    <td>If Yes, State what needs to be done:</td>
-    <td><textarea value={report.FurtherWorkRequired} style={{ width: '100%' }} /></td>
-  </tr>
-  <tr>
-    <td>Recommendation(s):</td>
-    <td><textarea value={report.Recommendations} style={{ width: '100%' }} /></td>
-  </tr>
-</table>
-
+            <img src={Logo} alt="Logo" className="modal-logo" />
+            <table className="report-table">
+              <tbody>
+              <tr>
+                  <td className="label">Report-ID:</td>
+                  <td className="value">{report._id}</td>
+                </tr>
+                <tr>
+                  <td className="label">Name of Facility:</td>
+                  <td className="value">{report.FacilityName} </td>
+                </tr>
+                <tr>
+                  <td className="label">Equipment Name:</td>
+                  <td className="value">{report.EquipmentName} </td>
+                </tr>
+                <tr>
+                  <td className="label">Engineer Name:</td>
+                  <td className="value">{report.Engineer} </td>
+                </tr>
+                <tr>
+                  <td className="label">Type:</td>
+                  <td className="value">{report.type} </td>
+                </tr>
+                <tr>
+                  <td className="label">Modal number:</td>
+                  <td className="value">{report.modelNumber} </td>
+                </tr>
+                <tr>
+                  <td className="label">Serial Number:</td>
+                  <td className="value">{report.SerialNumber} </td>
+                </tr>
+                <tr>
+                  <td className="label">Date(s):</td>
+                  <td className="value">{report.createdAt} </td>
+                </tr>
+                <tr>
+                  <td className="label">Problem Description:</td>
+                  <td className="value">{report.ProblemDesc}</td>
+                </tr>
+                <tr>
+                  <td className="label">Work Done:</td>
+                  <td className="value">{report.WorkDone} </td>
+                </tr>
+                <tr>
+                  <td className="label">If Yes, State what needs to be done:</td>
+                  <td className="value">{report.FurtherWorkDesc}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <button onClick={handlePrint}>Print Report</button>
-          <button onClick={handleDownloadPDF}>Download PDF</button>
-          <button onClick={onClose}>Close</button>
+          <div className="modal-buttons">
+            <button onClick={handlePrint} className="modal-button">Print Report</button>
+            <button onClick={handleDownloadPDF} className="modal-button">Download PDF</button>
+            <button onClick={onClose} className="modal-button">Close</button>
+          </div>
         </div>
       </div>
     </>

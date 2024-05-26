@@ -3,7 +3,6 @@ import { useReactToPrint } from "react-to-print";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import html2canvas from "html2canvas";
-import { textAlign } from "html2canvas/dist/types/css/property-descriptors/text-align";
 
 const OfficialReportModal = ({ report, onClose }) => {
   const modalRef = useRef();
