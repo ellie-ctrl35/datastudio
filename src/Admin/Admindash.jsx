@@ -30,7 +30,7 @@ const Admindash = () => {
   };
 
   return (
-    <div className="App">
+    <div style={{height:"120vh",backgroundColor:"#000"}} >
       <div className="the-navbar">
         <div className="logo-cont">
           <img src={Logo} alt="Studio" />
