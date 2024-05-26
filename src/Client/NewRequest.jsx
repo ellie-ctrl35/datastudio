@@ -65,7 +65,7 @@ const NewRequest = () => {
           <Link className="navlink" to="/client/requests/not-approved">
             Pending Requests
           </Link>
-          <Link className="navlink" to="/client/requests/not-approved">
+          <Link className="navlink" to="/client/officialreports">
             Official Reports
           </Link>
           

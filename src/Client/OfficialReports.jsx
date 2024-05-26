@@ -5,7 +5,7 @@ import Logo from "../resources/Studio.png";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
-import ReportModal from "../Engineers/ReportModal"; // Assuming you have a modal component for report details
+import OfficialReportModal from "./OfficialReportModal"; // Import the new modal component
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -22,14 +22,14 @@ const OfficialReports = () => {
   useEffect(() => {
     const encodedName = encodeURIComponent(name);
     axios
-      .get(`http://localhost:8080/getcreatedreports?name=${encodedName}`)
+      .get(`http://localhost:8080/getofficialreports?name=${encodedName}`)
       .then((res) => {
         setCreatedReport(res.data.data);
         console.log(res.data.data);
         setLoading(false);
       })
       .catch((error) => {
-        toast.error("Failed to fetch created reports:", error);
+        toast.error("Failed to fetch official reports:", error);
       });
   }, [name]);
 
@@ -72,42 +72,50 @@ const OfficialReports = () => {
             Official Reports
           </Link>
           <Avatar
-              round
-              name={name}
-              size={40}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            />
-            {isMenuOpen && (
-              <div className="avatar-menu">
-                <p>{name}</p>
-               {/*<p>{author}</p>*/}
-                <p>{userInfo.role}</p>
-                <button onClick={handleLogout}>Logout</button>
-              </div>
-            )}
+            round
+            name={name}
+            size={40}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          />
+          {isMenuOpen && (
+            <div className="avatar-menu">
+              <p>{name}</p>
+              <p>{userInfo.role}</p>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
         </div>
       </div>
-      <div style={{position:"absolute",width:"25%",height:"6%",top:"2%",left:"15%"}}>
+      <div style={{ position: "absolute", width: "25%", height: "6%", top: "2%", left: "15%" }}>
         <input
           type="text"
           placeholder="Search by equipment name..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          style={{width:"100%",height:"90%",border:"none",outline:"none",paddingLeft:"5%",fontFamily:"Inter",fontSize:"1.2rem",borderRadius:4}}
+          style={{
+            width: "100%",
+            height: "90%",
+            border: "none",
+            outline: "none",
+            paddingLeft: "5%",
+            fontFamily: "Inter",
+            fontSize: "1.2rem",
+            borderRadius: 4,
+          }}
         />
       </div>
       {loading ? (
         <ThreeDots color="dodgerblue" height={120} width={120} />
       ) : (
         <div className="bottom-half">
-          <div style={{display:'flex',flexDirection:"row",alignItems:"center",gap:"17%",width:"90%",fontFamily:"Inter",marginLeft:"-5%"}}>
+          <div style={{ display: 'flex', flexDirection: "row", alignItems: "center", gap: "17%", width: "90%", fontFamily: "Inter", marginLeft: "-5%" }}>
             <p>Report ID</p>
             <p>Facility Name</p>
             <p>Serial Number</p>
             <p>Equipment Name </p>
           </div>
           <ul className="request-list">
-          {filteredReports.map((report) => (
+            {filteredReports.map((report) => (
               <li className="thelist" key={report._id}>
                 <p>{report._id}</p>
                 <p>{report.FacilityName}</p>
@@ -122,7 +130,7 @@ const OfficialReports = () => {
         </div>
       )}
       {selectedReport && (
-        <ReportModal report={selectedReport} onClose={closeModal} />
+        <OfficialReportModal report={selectedReport} onClose={closeModal} />
       )}
     </div>
   );
