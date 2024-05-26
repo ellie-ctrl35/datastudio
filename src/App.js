@@ -11,6 +11,7 @@ import CreateReport from "./Engineers/CreateReport";
 import ReportHistory from "./Engineers/ReportHistory";
 import { AuthContext } from "./Context/AuthContext";
 import { useContext, useEffect } from "react";
+import OfficialReports from "./Client/OfficialReports";
 
 function App() {
   const { userToken, userInfo, isLogged } = useContext(AuthContext);
@@ -31,6 +32,7 @@ function App() {
                 path="/client/requests/not-approved"
                 element={<NRequest />}
               />
+              <Route path="/client/officialreports" element={<OfficialReports />} />
               <Route
                 path="/"
                 element={<Navigate replace to="/client/new-request" />}

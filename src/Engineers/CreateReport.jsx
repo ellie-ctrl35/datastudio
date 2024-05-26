@@ -41,7 +41,7 @@ const CreateReport = () => {
       .catch((error) => {
         toast.error("Failed to fetch assigned requests:", error);
       });
-  }, [name,isModalOpen]); // Depend on 'name' to re-fetch if it changes
+  }, [name, isModalOpen]); // Depend on 'name' to re-fetch if it changes
 
   const handleLogout = () => {
     logout();
@@ -63,19 +63,19 @@ const CreateReport = () => {
             Reports History
           </Link>
           <Avatar
-              round
-              name={name}
-              size={40}
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            />
-            {isMenuOpen && (
-              <div className="avatar-menu">
-                <p>{name}</p>
-                <p>{email}</p>
-                <p>{userInfo.role}</p>
-                <button onClick={handleLogout}>Logout</button>
-              </div>
-            )}
+            round
+            name={name}
+            size={40}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          />
+          {isMenuOpen && (
+            <div className="avatar-menu">
+              <p>{name}</p>
+              <p>{email}</p>
+              <p>{userInfo.role}</p>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
         </div>
       </div>
       <div className="bottom-half">
@@ -85,9 +85,7 @@ const CreateReport = () => {
           <p>Client</p>
         </div>
         {loading ? (
-          <div className="loading-container">
-            <ThreeDots color="#fff" height={80} width={80} />
-          </div>
+          <ThreeDots color="dodgerblue" height={80} width={80} />
         ) : (
           <ul className="request-list">
             {assignedRequest.map((request) => (

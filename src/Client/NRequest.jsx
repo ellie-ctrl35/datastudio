@@ -86,7 +86,7 @@ const NRequest = () => {
           Pending Requests
         </h2>
         {loading ? (
-          <ThreeDots color="#fff" height={80} width={80} />
+          <ThreeDots color="dodgerblue" height={150} width={150} />
         ) : (
           <ul className="listbox">
             <div className="list-item">
